@@ -1,0 +1,55 @@
+COMMAND: cargo test --locked --features custom-instr lab_custom_backend_tests
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: `here` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.55s
+     Running unittests src/lib.rs (target/debug/build/here/df70a076522f4404/out/here-df70a076522f4404)
+
+running 3 tests
+test isa::riscv::executor::test::lab_custom_backend_tests::fetched_pipeline_dependencies ... FAILED
+test isa::riscv::executor::test::lab_custom_backend_tests::architectural_registers_and_pc_wrap ... FAILED
+test isa::riscv::executor::test::lab_custom_backend_tests::byte_lanes_and_boundaries ... FAILED
+
+failures:
+
+---- isa::riscv::executor::test::lab_custom_backend_tests::fetched_pipeline_dependencies stdout ----
+
+thread 'isa::riscv::executor::test::lab_custom_backend_tests::fetched_pipeline_dependencies' (319) panicked at src/isa/riscv/cpu_tester.rs:151:9:
+assertion `left == right` failed: Register #3 incorrect
+  left: 0
+ right: 251
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- isa::riscv::executor::test::lab_custom_backend_tests::architectural_registers_and_pc_wrap stdout ----
+
+thread 'isa::riscv::executor::test::lab_custom_backend_tests::architectural_registers_and_pc_wrap' (317) panicked at src/isa/riscv/cpu_tester.rs:151:9:
+assertion `left == right` failed: Register #1 incorrect
+  left: 5
+ right: 251
+
+---- isa::riscv::executor::test::lab_custom_backend_tests::byte_lanes_and_boundaries stdout ----
+
+thread 'isa::riscv::executor::test::lab_custom_backend_tests::byte_lanes_and_boundaries' (318) panicked at src/isa/riscv/cpu_tester.rs:151:9:
+assertion `left == right` failed: Register #3 incorrect
+  left: 0
+ right: 18374403900871474942
+
+
+failures:
+    isa::riscv::executor::test::lab_custom_backend_tests::architectural_registers_and_pc_wrap
+    isa::riscv::executor::test::lab_custom_backend_tests::byte_lanes_and_boundaries
+    isa::riscv::executor::test::lab_custom_backend_tests::fetched_pipeline_dependencies
+
+test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 320 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+
+EXIT_CODE=101

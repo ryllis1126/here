@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 /* RV64 custom-0: eight independent unsigned byte lanes, no memory effects.
- * Chapter 2 exposes the encoding; actual result semantics arrive in Chapter 3.
+ * psub8 wraps each lane modulo 256; pabsdiff8 returns each unsigned distance.
  */
 static inline uint64_t lab_psub8(uint64_t a, uint64_t b) {
     uint64_t result;

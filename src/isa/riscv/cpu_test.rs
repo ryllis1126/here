@@ -765,7 +765,7 @@ fn test_custom_instr() {
 #[cfg(feature = "custom-instr")]
 #[test]
 fn test_lab_custom_frontend_dispatch() {
-    for raw in [0x0020_a18b_u32, 0x0020_b18b_u32] {
+    for (raw, expected) in [(0x0020_a18b_u32, 0xfefe), (0x0020_b18b_u32, 0x0202)] {
         run_test_exec_decode(
             raw,
             |builder| {
@@ -775,14 +775,140 @@ fn test_lab_custom_frontend_dispatch() {
                     .reg(3, 0x55)
                     .pc(ram_config::BASE_ADDR)
             },
-            // Chapter 2 only proves dispatch and normal retirement, not arithmetic.
+            // Chapter 3 adds arithmetic while retaining dispatch/retirement checks.
             |checker| {
                 checker
                     .reg(1, 0x0102)
                     .reg(2, 0x0304)
-                    .reg(3, 0x55)
+                    .reg(3, expected)
                     .pc(ram_config::BASE_ADDR + 4)
                     .csr(Minstret::get_index(), 1)
+            },
+        );
+    }
+}
+
+#[cfg(feature = "custom-instr")]
+mod lab_custom_backend_tests {
+    use super::*;
+
+    #[test]
+    fn byte_lanes_and_boundaries() {
+        // Literal expectations are hand-derived independently of the executor.
+        for (a, b, sub, diff) in [
+            (0, 0, 0, 0),
+            (u64::MAX, u64::MAX, 0, 0),
+            (
+                u64::MAX,
+                0x0101010101010101,
+                0xfefefefefefefefe,
+                0xfefefefefefefefe,
+            ),
+            (0, 0x0101010101010101, u64::MAX, 0x0101010101010101),
+            (
+                0x8080808080808080,
+                0x7f7f7f7f7f7f7f7f,
+                0x0101010101010101,
+                0x0101010101010101,
+            ),
+            (
+                0x0001000100010001,
+                0x0100010001000100,
+                0xff01ff01ff01ff01,
+                0x0101010101010101,
+            ),
+            (
+                0x0011223344556677,
+                0x7766554433221100,
+                0x89abcdef11335577,
+                0x7755331111335577,
+            ),
+            (
+                0x0100000000000000,
+                0,
+                0x0100000000000000,
+                0x0100000000000000,
+            ),
+        ] {
+            for (raw, expected) in [(0x0020_a18b_u32, sub), (0x0020_b18b_u32, diff)] {
+                run_test_exec_decode(
+                    raw,
+                    |builder| builder.reg(1, a).reg(2, b).pc(ram_config::BASE_ADDR),
+                    |checker| {
+                        checker
+                            .reg(1, a)
+                            .reg(2, b)
+                            .reg(3, expected)
+                            .pc(ram_config::BASE_ADDR + 4)
+                            .csr(Minstret::get_index(), 1)
+                    },
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn architectural_registers_and_pc_wrap() {
+        for raw in [0x0020_a00b_u32, 0x0020_b00b_u32] {
+            // rd=x0
+            run_test_exec_decode(
+                raw,
+                |builder| {
+                    builder
+                        .reg(1, 5)
+                        .reg(2, 10)
+                        .reg(31, 0x55)
+                        .pc(u64::MAX - 3)
+                        .csr(Minstret::get_index(), 9)
+                },
+                |checker| {
+                    checker
+                        .reg(0, 0)
+                        .reg(1, 5)
+                        .reg(2, 10)
+                        .reg(31, 0x55)
+                        .pc(0)
+                        .csr(Minstret::get_index(), 10)
+                },
+            );
+        }
+        run_test_exec_decode(
+            0x0020_a08b, // rd=rs1
+            |builder| builder.reg(1, 5).reg(2, 10),
+            |checker| checker.reg(1, 0xfb).reg(2, 10),
+        );
+        run_test_exec_decode(
+            0x0020_218b, // psub8 x3,x0,x2
+            |builder| builder.reg(2, 1),
+            |checker| checker.reg(0, 0).reg(3, 0xff),
+        );
+        run_test_exec_decode(
+            0x0000_b18b, // pabsdiff8 x3,x1,x0
+            |builder| builder.reg(1, 0x8000000000000080),
+            |checker| checker.reg(3, 0x8000000000000080),
+        );
+    }
+
+    #[test]
+    fn fetched_pipeline_dependencies() {
+        run_test_cpu_step(
+            &[
+                0x0050_0093, // addi x1,x0,5
+                0x00a0_0113, // addi x2,x0,10
+                0x0020_a18b, // psub8 x3,x1,x2 = 0xfb, no borrow into byte1
+                0x0021_b20b, // pabsdiff8 x4,x3,x2 = 0xf1
+                0x0011_a28b, // psub8 x5,x3,x1 = 0xf6
+            ],
+            |builder| builder,
+            |checker| {
+                checker
+                    .reg(1, 5)
+                    .reg(2, 10)
+                    .reg(3, 0xfb)
+                    .reg(4, 0xf1)
+                    .reg(5, 0xf6)
+                    .pc(ram_config::BASE_ADDR + 20)
+                    .csr(Minstret::get_index(), 5)
             },
         );
     }

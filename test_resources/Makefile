@@ -8,7 +8,7 @@ DUMP ?= ./dump
 
 # toolchain
 RV_CC ?= $(ARCH)-elf-gcc
-RV_CFLAG := -ffreestanding -nostdlib -march=rv64imfdvzicsr -mabi=lp64d -mcmodel=medany -I$(INC) -g
+RV_CFLAG := -ffreestanding -nostdlib -march=rv64imfdvzicsr -mabi=lp64d -mcmodel=medany -I$(INC) -g -MMD -MP
 RV_LD ?= $(ARCH)-elf-ld
 RV_LDFLAG := -static -g
 RV_DUMP ?= $(ARCH)-elf-objdump
@@ -66,7 +66,7 @@ $(OBJ)/boot.o: $(SRC)/boot.S
 $(OBJ)/%.o: $(LIB)/%.c
 	@ $(call echo_cmd, $(RV_CC_PROMPT), $@)
 	$(Q) mkdir $(OBJ) $(BIN) -p
-	$(Q) $(RV_CC) $(RV_CFLAG) -c $^ -o $@
+	$(Q) $(RV_CC) $(RV_CFLAG) -c $< -o $@
 
 $(BIN)/%.elf: $(OBJ)/%.o $(LIBS_OBJ) linker.ld
 	@ $(call echo_cmd, $(RV_LD_PROMPT), $@)
@@ -94,3 +94,6 @@ qemu_run: build
 
 clean:
 	rm -r $(BIN) $(OBJ)
+
+# Rebuild guests when an included API header changes.
+-include $(wildcard $(OBJ)/*.d)

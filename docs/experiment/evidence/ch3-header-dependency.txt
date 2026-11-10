@@ -1,0 +1,39 @@
+BEFORE: make -n -C test_resources bin/lab_custom.elf (header newer, dependency not tracked)
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+make: 'bin/lab_custom.elf' is up to date.
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+
+AFTER: make -B -C test_resources -j4; touch test_resources/include/custom_ops.h; make -n -C test_resources bin/lab_custom.elf
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+printf "\033[1;34m%-10s %s\033[0m\n" "RV_CC" "obj/lab_custom.o"
+mkdir -p ./obj ./bin
+riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv64imfdvzicsr -mabi=lp64d -mcmodel=medany -I./include -g -MMD -MP -c src/lab_custom.c -o obj/lab_custom.o
+printf "\033[1;34m%-10s %s\033[0m\n" "RV_LD" "bin/lab_custom.elf"
+mkdir -p ./obj ./bin
+riscv64-unknown-elf-ld -static -g -T linker.ld -o bin/lab_custom.elf obj/lab_custom.o obj/io.o obj/log.o obj/boot.o obj/trap.o obj/trap_handler.o obj/power.o
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+
+ACTUAL REBUILD:
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/lab_custom.o[0m
+[1;34mRV_LD      bin/lab_custom.elf[0m
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+
+EXIT_CODE=0
+
+LIBRARY HEADER REGRESSION: make -C test_resources -W include/io.h obj/io.o
+BEFORE FIX (actual compiler failure; original wrapper did not retain make exit code):
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/io.o[0m
+riscv64-unknown-elf-gcc: fatal error: cannot specify '-o' with '-c', '-S' or '-E' with multiple files
+compilation terminated.
+make: *** [Makefile:69: obj/io.o] Error 1
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+
+AFTER FIX: compiler input uses $< (source only)
+COMMAND: ['make', '-C', 'test_resources', '-W', 'include/io.h', 'obj/io.o']
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/io.o[0m
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+
+EXIT_CODE=0

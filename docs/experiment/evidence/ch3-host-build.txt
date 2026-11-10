@@ -1,0 +1,3 @@
+COMMAND: ['cc', '-std=c11', '-Wall', '-Wextra', '-Werror', '-O2', '-fsanitize=undefined', '-DHOST_TEST', '/home/kazemiyuuka/projects/riscv/here/test_resources/src/lab_calculator.c', '-o', '/home/kazemiyuuka/projects/riscv/here/.cache/lab/calculator-host']
+
+EXIT_CODE=0

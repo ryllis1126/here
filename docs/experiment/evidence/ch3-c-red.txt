@@ -1,0 +1,15 @@
+LOG=.cache/lab/emulator-20261110T121129-12.log
+COMMAND: timeout --foreground 60 target/release/here test_resources/bin/lab_custom.elf --max-cycles 10000000
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+CUSTOM BACKEND FAIL op=0 a=0xffffffffffffffff b=0xffffffffffffffff got=0xffffffffffffffff expected=0x0
+
+
+Used time: 0.000537s
+EXIT_CODE=0
