@@ -1,0 +1,51 @@
+LOG=.cache/lab/cargo-build-20261110T150555-3.log
+COMMAND: cargo build --release --locked -j 4 --features custom-instr
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+warning: unused dependency `bit-vec`
+  --> Cargo.toml:36:1
+   |
+36 | bit-vec = { version = "0.9.1" }
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `cargo::unused_dependencies` is set to `warn` by default
+help: consider removing the dependency on `bit-vec`
+warning: unused dependency `cfg_aliases`
+  --> Cargo.toml:43:1
+   |
+43 | cfg_aliases = { version = "*" }
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: consider removing the dependency on `cfg_aliases`
+warning: unused dependency `rand`
+  --> Cargo.toml:23:1
+   |
+23 | rand = { version = "0.9.2", default-features = false, features = ["std"] }
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: consider removing the dependency on `rand`
+warning: unused dependency `rand_chacha`
+  --> Cargo.toml:26:1
+   |
+26 | / rand_chacha = { version = "0.9.0", default-features = false, features = [
+27 | |     "std",
+28 | | ] }
+   | |___^
+   |
+help: consider removing the dependency on `rand_chacha`
+warning: `here` (manifest) generated 4 warnings
+    Finished `release` profile [optimized] target(s) in 0.28s
+EXIT_CODE=0
+LOG=.cache/lab/baremetal-build-20261110T150556-3.log
+COMMAND: make -C test_resources -j 4
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_DUMP    dump/lab_rng.dump[0m
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+EXIT_CODE=0

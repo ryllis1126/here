@@ -73,6 +73,15 @@ case "${1:-help}" in
         fi
         exec riscv64-unknown-elf-gdb "$@"
         ;;
-    help) printf 'usage: bash scripts/lab.sh {env|build|isa|test|run ELF|gdb} [args]\n' ;;
+    dtc)
+        shift
+        if command -v dtc >/dev/null; then exec dtc "$@"; fi
+        if [[ ! -x .cache/tools/dtc/usr/bin/dtc ]]; then
+            printf 'Prepare first: bash scripts/setup-linux.sh\n' >&2; exit 2
+        fi
+        export LD_LIBRARY_PATH="$LAB_ROOT/.cache/tools/dtc/usr/lib/x86_64-linux-gnu:$LAB_ROOT/.cache/tools/dtc/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        exec .cache/tools/dtc/usr/bin/dtc "$@"
+        ;;
+    help) printf 'usage: bash scripts/lab.sh {env|build|isa|test|run ELF|gdb|dtc} [args]\n' ;;
     *) printf 'unknown lab command: %s\n' "$1" >&2; exit 2 ;;
 esac

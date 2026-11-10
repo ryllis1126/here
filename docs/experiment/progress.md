@@ -1,6 +1,6 @@
 # 持续执行进度
 
-当前：Chapter4必做及优先级扩展实测/独立审查通过，保存本地ch4后实施Chapter5。用户反馈可能已配置gh，但WSL内外gh auth status均仍未登录，已反馈需WSL单独认证，继续暂停推送。
+当前：Chapter5 VirtIO-RNG实测/审查通过，准备提交ch5，随后进入Chapter6。用户反馈可能已配置gh，但WSL内外gh auth status均仍未登录，已反馈需WSL单独认证，继续暂停推送。
 
 基础HEAD：7cd34e277692c5fe6c5a9959b3206e0cff0808ff。2026-11-10开始时master干净、origin/upstream同步，upstream push禁用。
 
@@ -31,5 +31,8 @@
 | 0x02 | 5f02412 | ch2 | 按要求暂停推送 |
 | 0x03原始 | 65b5a51 | ch3 | 原Tag含UART竞态失败运行，保留待补充修复；暂停推送 |
 | 0x03补充验收 | fa18065 | ch3-fix1 | 339/344项及20次C运行通过；WSL认证待恢复 |
+| 0x04 | edbeb24 | ch4 | 必做和优先级扩展通过；WSL认证待恢复 |
 
 首次推送命令：git push --atomic origin refs/heads/master:refs/heads/master refs/tags/ch0:refs/tags/ch0，退出128：could not read Username for https://github.com。已通知用户在WSL配置身份认证，未请求在聊天发送凭据。认证恢复前继续本地实验，不重试推送。
+
+- Task 8本地验收通过：全新VirtIO-RNG，6项公开MMIO测试、真实裸机2次DMA/IRQ、Linux原生virtio_rng.0和/dev/hwrng读取32字节，345/350项及前章回归全部通过；独立审查无Critical/Important问题，补充分散描述符链测试。ch5由Tag定位，下一章补实际SHA。

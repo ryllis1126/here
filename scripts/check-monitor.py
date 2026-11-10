@@ -9,10 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 os.chdir(ROOT)
 tools = importlib.import_module("check-debuggers")
+PREFIX = os.environ.get("HERE_LAB_CHAPTER", "ch4")
 assert Path("test_resources/src/lab_monitor.c").exists(), "M-mode monitor not implemented yet"
 command = ["target/release/here", "test_resources/bin/lab_monitor.elf",
            "--max-cycles", "20000000"]
-result = tools.capture(command, "ch4-monitor.txt", 30)
+result = tools.capture(command, f"{PREFIX}-monitor.txt", 30)
 output = result.stdout + result.stderr
 assert result.returncode == 0, output
 assert "MONITOR FAIL" not in output, output
@@ -41,7 +42,7 @@ fair = re.search(r"ROUND ROBIN PASS ticks0=(\d+) ticks1=(\d+) switches=(\d+)", o
 assert fair and all(int(value) >= 2 for value in fair.groups())
 for target in ("ecall_test", "trap_test", "clint"):
     cmd = ["target/release/here", f"test_resources/bin/{target}.elf", "--max-cycles", "1000000"]
-    regression = tools.capture(cmd, f"ch4-regression-{target}.txt", 15)
+    regression = tools.capture(cmd, f"{PREFIX}-regression-{target}.txt", 15)
     assert regression.returncode == 0, regression.stderr
     assert "PASS" in regression.stdout and "FAIL" not in regression.stdout, regression.stdout
     assert "Max cycles reached" not in regression.stderr, regression.stderr

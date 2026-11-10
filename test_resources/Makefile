@@ -35,6 +35,7 @@ TARGETS += main fib prime matrix_mul vector_kernels io_bench trap_test virtio_bl
 TARGETS += lab_startup lab_calculator
 TARGETS += lab_custom
 TARGETS += lab_monitor
+TARGETS += lab_rng
 TARGET_ELFS := $(patsubst %,$(BIN)/%.elf,$(TARGETS))
 TARGET_DUMPS := $(patsubst %,$(DUMP)/%.dump,$(TARGETS))
 TARGET ?= main

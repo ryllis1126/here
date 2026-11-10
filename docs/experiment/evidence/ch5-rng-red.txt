@@ -1,0 +1,52 @@
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.49s
+     Running tests/virtio_rng.rs (target/debug/build/here/1509e616532d9d21/out/virtio_rng-1509e616532d9d21)
+
+running 4 tests
+test entropy_caps_a_large_request_without_overwriting_its_tail ... FAILED
+test entropy_dma_interrupt_ack_and_reset ... FAILED
+test entropy_rejects_device_readable_buffers ... FAILED
+test entropy_source_failure_requests_reset_and_preserves_guest_data ... FAILED
+
+failures:
+
+---- entropy_caps_a_large_request_without_overwriting_its_tail stdout ----
+
+thread 'entropy_caps_a_large_request_without_overwriting_its_tail' (80) panicked at tests/virtio_rng.rs:25:10:
+virtio-rng must be configurable: "Unknown device type: virtio-rng"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- entropy_dma_interrupt_ack_and_reset stdout ----
+
+thread 'entropy_dma_interrupt_ack_and_reset' (81) panicked at tests/virtio_rng.rs:25:10:
+virtio-rng must be configurable: "Unknown device type: virtio-rng"
+
+---- entropy_rejects_device_readable_buffers stdout ----
+
+thread 'entropy_rejects_device_readable_buffers' (82) panicked at tests/virtio_rng.rs:25:10:
+virtio-rng must be configurable: "Unknown device type: virtio-rng"
+
+---- entropy_source_failure_requests_reset_and_preserves_guest_data stdout ----
+
+thread 'entropy_source_failure_requests_reset_and_preserves_guest_data' (83) panicked at tests/virtio_rng.rs:25:10:
+virtio-rng must be configurable: "Unknown device type: virtio-rng"
+
+
+failures:
+    entropy_caps_a_large_request_without_overwriting_its_tail
+    entropy_dma_interrupt_ack_and_reset
+    entropy_rejects_device_readable_buffers
+    entropy_source_failure_requests_reset_and_preserves_guest_data
+
+test result: FAILED. 0 passed; 4 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test virtio_rng`

@@ -1,0 +1,21 @@
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.57s
+     Running tests/virtio_rng.rs (target/debug/build/here/1509e616532d9d21/out/virtio_rng-1509e616532d9d21)
+
+running 5 tests
+test entropy_rejects_device_readable_buffers ... ok
+test entropy_caps_a_large_request_without_overwriting_its_tail ... ok
+test entropy_dma_interrupt_ack_and_reset ... ok
+test entropy_source_failure_requests_reset_and_preserves_guest_data ... ok
+test entropy_reset_waits_for_an_outstanding_request ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s

@@ -53,6 +53,7 @@ impl FromStr for DeviceConfig {
         let mut parts = s.split(':');
         let dev_type = match parts.next() {
             Some("virtio-block") => VirtIODeviceEnum::VirtIOBlock,
+            Some("virtio-rng") => VirtIODeviceEnum::VirtIORng,
             Some("virtio-network") => VirtIODeviceEnum::VirtIONet,
             Some(other) => return Err(format!("Unknown device type: {}", other)),
             None => return Err("Invalid device arguments.".into()),

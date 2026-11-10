@@ -1,0 +1,390 @@
+LOG=.cache/lab/cargo-test-20261110T150818-22.log
+COMMAND: timeout --kill-after=5 300 cargo test --locked --features riscv-tests -j 4
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: `here` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.45s
+     Running unittests src/lib.rs (target/debug/build/here/80c9898b78e8c199/out/here-80c9898b78e8c199)
+
+running 319 tests
+test board::builder::tests::test_rvboard_builder_missing_plic - should panic ... ok
+test board::builder::tests::test_rvboard_builder_missing_clint - should panic ... ok
+test board::virt::tests::none_uart_rejects_external_operations ... ok
+test board::builder::native_tests::test_rvboard_builder_basic ... ok
+test board::virt::tests::external_uart_exposes_owned_port ... ok
+test byte_io::stdio::tests::host_command_is_filtered_before_target_routing ... ok
+test byte_io::stdio::tests::host_command_is_recognized_without_a_target ... ok
+test board::builder::native_tests::test_rvboard_builder_add_device ... ok
+test clock::tests::timer_accepts_any_clock_implementation ... ok
+test byte_io::stdio::tests::uart_sender_is_registered_directly ... ok
+test clock::tests::virtual_clock_is_derived_lazily_from_cycles ... ok
+test board::virt::tests::virtboard_mmio_uses_uart16550a ... ok
+test byte_io::stdio::tests::switches_targets_without_moving_old_buffer ... ok
+test board::builder::native_tests::test_rvboard_builder_multiple_virtio_devices ... ok
+test cpu::vector_reg_file::test::read_test ... ok
+test cpu::vector_reg_file::test::write_segement_test ... ok
+test board::virt::tests::test_memory_image_and_initial_register_config ... ok
+test board::virt::tests::stdio_uart_exposes_only_router_handle ... ok
+test device::aclint::tests::test_msip_read_write ... ok
+test cpu::vector_reg_file::test::write_test_without_segement ... ok
+test device::aclint::tests::test_mtime_read_write ... ok
+test device::aclint::tests::test_mtimecmp_read_write ... ok
+test device::plic::test::claim_ignores_threshold_but_notification_does_not ... ok
+test device::id_allocator::tests::test_id_allocator_without_irq ... ok
+test device::plic::test::context_irq_line_is_driven_only_on_level_changes ... ok
+test device::plic::test::completion_samples_device_after_arena_registration ... ok
+test device::id_allocator::tests::test_id_allocator_with_irq ... ok
+test device::plic::test::plic_layout_test ... ok
+test device::mmio::test::mmio_rejects_accesses_crossing_device_end ... ok
+test device::mmio::test::mmio_mem_test ... ok
+test device::sample_timer::tests::control_bit_zero_does_not_clear_pending_interrupt ... ok
+test device::plic::test::high_source_reasserts_once_after_completion ... ok
+test device::plic::test::interrupt_test ... ok
+test device::plic::test::lower_interrupt_id_wins_priority_ties ... ok
+test device::spi::spi_sifive::test::transfer_to_selected_slave_through_sifive_txdata_rxdata ... ok
+test device::spi::spi_sifive::test::connects_controller_to_w25q512jvq_block_slave ... ok
+test device::spi::spi_sifive::test::changing_csid_while_held_deselects_previous_slave ... ok
+test device::plic::test::lowering_source_does_not_retract_an_accepted_request ... ok
+test device::spi::w25q512::test::exposes_minimal_sfdp_header ... ok
+test device::spi::w25q512::test::reads_jedec_id_for_linux_spi_nor_match ... ok
+test device::sample_timer::tests::control_bit_one_clears_pending_interrupt_immediately ... ok
+test device::uart16550a::tests::divisor_latch_access_selects_dll_and_dlm ... ok
+test device::spi::w25q512::test::rejected_program_ignores_remaining_bytes_until_deselect ... ok
+test device::spi::w25q512::test::write_enable_ignores_extra_bytes_until_deselect ... ok
+test device::uart16550a::tests::fcr_remains_accessible_while_dlab_selects_divisors ... ok
+test device::plic::test::multiple_contexts_share_one_peripheral_snapshot ... ok
+test device::uart16550a::tests::fifo_reset_clears_receiver_and_rearms_transmitter_state ... ok
+test device::spi::w25q512::test::supports_4byte_read_opcode ... ok
+test device::mmio::test::mmio_stdout_test ... ok
+test device::spi::w25q512::test::erase_restores_erased_bytes ... ok
+test device::spi::w25q512::test::page_program_requires_write_enable_and_obeys_nor_bits ... ok
+test device::uart16550a::tests::iir_fifo_status_follows_fcr ... ok
+test device::uart16550a::tests::input_is_bounded ... ok
+test device::uart16550a::tests::input_raises_external_interrupt_when_rda_enabled ... ok
+test device::uart16550a::tests::input_test ... ok
+test device::uart16550a::tests::input_without_rda_enabled_does_not_interrupt ... ok
+test device::uart16550a::tests::modem_status_interrupt_is_reported_and_cleared_by_msr_read ... ok
+test device::uart16550a::tests::output_test ... ok
+test device::uart16550a::tests::line_status_interrupt_is_reported_and_cleared_by_lsr_read ... ok
+test device::uart16550a::tests::programming_dlm_does_not_enable_thre_interrupt ... ok
+test device::uart16550a::tests::thre_interrupt_is_input_independent ... ok
+test device::uart16550a::tests::plic_device_reports_current_uart_irq_level ... ok
+test device::virtio::virtio_block::test::implemented_feature_set_matches_block_handlers ... ok
+test device::sample_timer::tests::timer_task_applies_schedule_that_interrupts_active_deadline ... ok
+test device::virtio::virtio_queue::tests::test_virt_queue_avail_ring ... ok
+test device::uart16550a::tests::rda_stays_asserted_until_input_fully_drained ... ok
+test device::virtio::virtio_queue::tests::test_virt_queue_indices_are_free_running ... ok
+test fpu::soft_float::tests::test_div_inexact_status ... ok
+test fpu::soft_float::tests::test_float_convert ... ok
+test device::virtio::virtio_block::test::rejects_unaligned_backing_file_size - should panic ... ok
+test fpu::soft_float::tests::test_min_max_signed_zero ... ok
+test fpu::soft_float::tests::test_min_max_nan ... ok
+test device::virtio::virtio_block::test::test_file_read_write ... ok
+test device::virtio::virtio_mmio::test::feature_registers_cover_all_128_bits ... ok
+test fpu::soft_float::tests::test_nan_boxing ... ok
+test fpu::soft_float::tests::test_nan_generation ... ok
+test fpu::soft_float::tests::test_classify ... ok
+test fpu::soft_float::tests::test_float_cmp ... ok
+test fpu::soft_float::tests::test_sign_injection_nan ... ok
+test fpu::soft_float::tests::test_nan_propagation ... ok
+test device::virtio::virtio_queue::tests::test_virt_queue_used_ring ... ok
+test fpu::soft_float::tests::test_simple_arith ... ok
+test device::virtio::virtio_block::test::test_blk_write ... ok
+test device::virtio::virtio_block::test::test_blk_read ... ok
+test fpu::soft_float::tests::test_sqrt ... ok
+test fpu::soft_float::tests::test_sqrt_exact_f64 ... ok
+test fpu::soft_float::tests::test_subnormal_and_sign ... ok
+test fpu::soft_float::tests::test_ternary_mul_add ... ok
+test gdb::desc::tests::build_includes_d_extension ... ok
+test gdb::desc::tests::build_sorts_csrs_and_skips_fpu_by_default ... ok
+test gdb::desc::tests::build_includes_f_extension ... ok
+test isa::cache::tests::set_cache_test ... ok
+test isa::cache::tests::common_cache_tests ... ok
+test isa::riscv::csr_reg::test::test_read_privilege ... ok
+test device::sample_timer::tests::timer_task_rearms_after_a_new_schedule ... ok
+test isa::riscv::csr_reg::test::test_rw_by_type ... ok
+test isa::riscv::csr_reg::test::test_rw_by_addr ... ok
+test isa::riscv::csr_reg::test::test_s_mode_shadow_csr ... ok
+test isa::riscv::debugger::test::test_ftrace_classifies_riscv_return_address_stack_actions ... ok
+test isa::riscv::csr_reg::test::test_xstatus ... ok
+test isa::riscv::csr_reg::test::test_vector_fixed_point_shadow_csr ... ok
+test isa::riscv::csr_reg::test::test_mcycle ... ok
+test isa::riscv::debugger::test::test_breakpoint_riscv_on_current ... ok
+test gdb::basic::tests::read_addrs_fails_when_any_byte_is_unreadable ... ok
+test isa::riscv::debugger::test::test_ftrace_disabled_until_started_and_restart_clears_state ... ok
+test isa::riscv::debugger::test::test_ftrace_ignores_unlinked_jumps ... ok
+test isa::riscv::debugger::test::test_breakpoint_riscv ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_privilege ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rv64f ... ok
+test isa::riscv::debugger::test::test_ftrace_records_direct_call_and_return ... ok
+test isa::riscv::debugger::test::test_ftrace_unknown_symbols_are_counted_separately ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rvc_control ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rv32i ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rvc_arith ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rvc_load_store ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rva ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rvv_secondary_opcode_fields ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rvc_priority ... ok
+test isa::riscv::decoder::decoder_test::test_default_decoder_excludes_vector ... ok
+test isa::riscv::decoder::decoder_test::test_deocder_csr ... ok
+test isa::riscv::debugger::test::test_ftrace_records_pop_then_push_as_return_then_call ... ok
+test isa::riscv::decoder::decoder_test::test_decoder_rv64i ... ok
+test isa::riscv::debugger::test::test_ftrace_records_indirect_call_using_link_register ... ok
+test isa::riscv::debugger::test::test_ftrace_records_compressed_call_and_return ... ok
+test isa::riscv::decoder::decoder_test::test_lab_custom_byte_diff_requires_feature ... ok
+test isa::riscv::executor::test::test_branch_decode ... ok
+test isa::riscv::executor::test::test_cpu_test_builder_enables_vector_isa ... ok
+test isa::riscv::executor::test::test_default_csr_value ... ok
+test isa::riscv::debugger::test::test_ftrace_queue_is_bounded_but_stats_are_not ... ok
+test isa::riscv::executor::test::test_rv_m ... ok
+test isa::riscv::executor::test::test_step_batch_executes_requested_cycles ... ok
+test isa::riscv::executor::test::test_rv64_f ... ok
+test isa::riscv::executor::test::test_amo ... ok
+test isa::riscv::instruction::exec_vector_function::test::const_stride_load_test ... ok
+test isa::riscv::executor::test::test_jump_decode ... ok
+test isa::riscv::executor::test::test_csr ... ok
+test isa::riscv::instruction::exec_vector_function::test::indexed_ordered_load_test ... ok
+test isa::riscv::instruction::exec_vector_function::test::indexed_ordered_store_test ... ok
+test device::virtio::virtio_mmio::test::test_mmio_blk_device ... ok
+test isa::riscv::executor::test::test_step_batch_zero_is_noop ... ok
+test isa::riscv::executor::test::test_step_batch_continues_after_exception ... ok
+test isa::riscv::instruction::exec_vector_function::test::const_stride_store_test ... ok
+test isa::riscv::executor::test::test_u_types_decode ... ok
+test isa::riscv::instruction::exec_vector_function::test::mask_store_uses_ceil_vl_over_8_bytes_and_restores_config ... ok
+test isa::riscv::executor::test::test_rv_c_branch_jump ... ok
+test isa::riscv::instruction::exec_vector_function::test::mask_load_and_store_decode_execute ... ok
+test isa::riscv::executor::test::test_load_store_decode ... ok
+test isa::riscv::instruction::exec_vector_function::test::slide1down_vx_decode_execute ... ok
+test isa::riscv::instruction::exec_vector_function::test::unit_stride_store_test ... ok
+test isa::riscv::instruction::exec_vector_function::test::mask_load_uses_ceil_vl_over_8_bytes_and_restores_config ... ok
+test isa::riscv::executor::test::test_step_batch_debug_stops_without_affecting_normal_execution ... ok
+test isa::riscv::instruction::exec_vector_function::test::slide1up_vx_decode_execute ... ok
+test isa::riscv::instruction::exec_vector_function::test::unit_stride_load_test ... ok
+test isa::riscv::instruction::exec_vector_function::test::unit_stride_load_test_cpu ... ok
+test isa::riscv::instruction::exec_vector_function::test::vector_add_vi_test_cpu ... ok
+test isa::riscv::isa_builder::tests::base_and_privileged_always_present ... ok
+test isa::riscv::instruction::exec_vector_function::test::unit_stride_store_test_cpu ... ok
+test isa::riscv::instruction::exec_vector_function::test::vector_load_fault_records_vstart_and_stops ... ok
+test isa::riscv::isa_builder::tests::compressed_double_glue_requires_both_c_and_d ... ok
+test isa::riscv::isa_builder::tests::extension_bits_match_misa_bitmap ... ok
+test isa::riscv::instruction::exec_vector_function::test::vsetvli_preserves_tail_policy_in_vector_config ... ok
+test isa::riscv::instruction::exec_vector_function::test::vector_add_vx_test_cpu ... ok
+test isa::riscv::instruction::exec_vector_function::test::whole_register_move_rejects_bad_rs1_encoding ... ok
+test isa::riscv::executor::test::test_rv_c_load_store ... ok
+test isa::riscv::isa_builder::tests::rejects_missing_prefix ... ok
+test isa::riscv::isa_builder::tests::rejects_wrong_xlen ... ok
+test isa::riscv::isa_builder::tests::rejects_unknown_multi_letter_extension ... ok
+test isa::riscv::isa_builder::tests::zicsr_and_zifencei_have_no_misa_bit ... ok
+test isa::riscv::isa_builder::tests::d_pulls_in_f_and_zicsr ... ok
+test isa::riscv::isa_builder::tests::rejects_unknown_base_letter ... ok
+test isa::riscv::executor::test::test_rv_c_float ... ok
+test isa::riscv::instruction::exec_vector_function::test::vector_load_resumes_from_vstart_and_clears_it ... ok
+test isa::riscv::instruction::exec_vector_function::test::vector_add_vv_test_cpu ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::addr_canonical_test ... ok
+test isa::riscv::isa_builder::tests::parses_full_isa_string ... ok
+test isa::riscv::isa_builder::tests::parses_vector_extension ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::access_effect_none_should_not_set_ad_bits ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::fault_on_clear_with_none_effect_should_not_fault ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::fault_on_clear_with_preset_ad_should_pass ... ok
+test isa::riscv::isa_builder::tests::g_expands_to_general ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::big_page_test ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::page_table_test ... ok
+test isa::riscv::instruction::exec_vector_function::test::vector_arithmetic_respects_vstart_and_clears_it ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::fault_on_clear_test ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::level0_non_leaf_should_fault ... ok
+test isa::riscv::executor::test::test_rv32_f ... ok
+test isa::riscv::trap::trap_controller::test::test_exception ... ok
+test isa::riscv::trap::trap_controller::test::test_illegal_instr ... ok
+test isa::riscv::mmu::tests::amo_invalidates_lr_reservation ... ok
+test isa::riscv::mmu::page_table::riscv64::test_sv39::rwx_authority_test ... ok
+test isa::riscv::trap::trap_controller::test::test_next_pc_by_tvec ... ok
+test isa::riscv::trap::trap_controller::test::test_instr_misaligned ... ok
+test isa::riscv::trap::trap_controller::test::test_load_fault ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_asub_keeps_extra_precision_before_rounding ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_aaddu_obeys_rounding_mode ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_asubu_keeps_negative_difference_before_rounding ... ok
+test isa::riscv::trap::trap_controller::test::test_store_fault ... ok
+test isa::riscv::trap::trap_controller::test::test_store_misaligned ... ok
+test isa::riscv::trap::trap_controller::test::test_swap ... ok
+test isa::riscv::executor::test::test_rv_c_arith ... ok
+test isa::riscv::trap::trap_controller::test::test_instr_fault ... ok
+test isa::riscv::mmu::tests::lr_sc_rejects_mmio_and_sc_clears_ram_reservation ... ok
+test isa::riscv::trap::trap_controller::test::test_load_misaligned ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_nclipu_fractional_lmul_overlap_check ... ok
+test isa::riscv::executor::test::test_vector_config ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_nclip_wx_saturates_signed ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_saddu_vv_saturates ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_sadd_vx_saturates_signed_min ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_smul_rounds_and_saturates ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_nclipu_wv_saturates ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_ssrl_vi_rounds ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_move_scalar_to_element_only_writes_element_zero ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_move_element_to_scalar_sign_extends_element_zero ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_adc_vvm_honors_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_adc_sbc_vvm ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_compress_vm ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_compress_vm_rejects_overlap_and_nonzero_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_compress_vm_tail_agnostic ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_add_vv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_first_m_returns_minus_one_when_no_match ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_id_v_honors_mask ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_special_rejects_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_add_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_bit_vv_honors_mask_tail_and_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_iota_m_honors_mask ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_vv_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_madc_msbc_mask_vvm ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_multiply_add ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_merge_vim_uses_signed_immediate_value ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_before_first_family ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_before_first_initializes_seen_first_from_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_cpop_and_first_m_honor_mask ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_multiply_add_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_bit_vv_binary ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_vv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_iota_m_counts_source_bits_before_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_merge_vvm_selects_by_v0 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_merge_vxm_selects_scalar_by_v0 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_move_v_uses_u64_width ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_rejects_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_scalar_forms_reject_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vi ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vv_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgatherei16_vv_rejects_widened_index_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgatherei16_vv_uses_16_bit_indices ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_rejects_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgatherei16_vv_uses_widened_index_group_for_e8 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_fractional_lmul_overlap_check ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_right_wi_signed ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1down_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1down_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1up_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slidedown_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_right_wv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1up_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_vv_binary ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mul_div_e64 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slideup_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slidedown_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_widening_add_sub ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slideup_honors_mask_and_tail ... ok
+test isa::riscv::vector::test::test_indexed_ordered_load ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_right_wx ... ok
+test isa::riscv::vector::test::test_indexed_ordered_store ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_widening_mul ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_zext_vf2 ... ok
+test isa::riscv::vector::test::test_mask_unit_stride_store ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_vx_binary ... ok
+test isa::riscv::vector::test::test_store_whole_register ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_whole_register_move_copies_group ... ok
+test isa::riscv::vector::test::test_unit_stride_load ... ok
+test isa::riscv::vector::test::test_unit_stride_store ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_scalar_move_uses_u64_width ... ok
+test isa::riscv::vector::types::test::vector_type_test ... ok
+test isa::riscv::vector::types::test::vector_type_test_unequal_sew - should panic ... ok
+test isa::riscv::vector::test::test_mask_unit_stride_load ... ok
+test ram::tests::failed_sc_clears_reservation_and_validates_access ... ok
+test ram::tests::lr_sc_within_64bit_reservation_set_succeeds ... ok
+test isa::riscv::vector::test::test_mask_agnostic_unit_stride_store_does_not_touch_masked_elements ... ok
+test isa::riscv::vector::test::test_tail_agnostic_unit_stride_load ... ok
+test ram::tests::test_read_unaligned_address - should panic ... ok
+test ram::tests::test_insert_section_and_read ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_widening_multiply_add ... ok
+test ram::tests::test_read_write_reject_end_and_crossing_accesses ... ok
+test ram::tests::test_write_byte ... ok
+test ram::tests::test_insert_section_rejects_crossing_end - should panic ... ok
+test isa::riscv::vector::test::test_load_whole_register ... ok
+test board::virt::tests::test_step_cycles_advances_board_clock ... ok
+test rvdb::commands::tests::test_parse_reg_riscv64 ... ok
+test rvdb::printer::tests::format_asm_keeps_decoded_branch_and_jump_offsets ... ok
+test rvdb::commands::tests::test_info_breakpoints_preserves_address_space ... ok
+test rvdb::printer::tests::format_asm_recognizes_common_pseudo_instructions ... ok
+test rvdb::printer::tests::format_asm_recognizes_csr_pseudo_instructions ... ok
+test rvdb::commands::tests::test_list_advances_by_instruction_length ... ok
+test rvdb::printer::tests::format_raw_aligns_compressed_and_regular_instructions ... ok
+test rvdb::printer::tests::instruction_names_use_assembly_spelling ... ok
+test rvdb::sync_repl::tests::empty_line_repeats_the_last_command ... ok
+test rvdb::sync_repl::tests::target_is_restored_when_continue_returns_error ... ok
+test utils::test::test_negative_of ... ok
+test rvdb::commands::tests::test_regs_range_does_not_overflow ... ok
+test rvdb::printer::tests::format_asm_recognizes_zero_branch_pseudo_instructions ... ok
+test task_spawner::tests::smoke ... ok
+test rvdb::commands::tests::test_decoded_length_in_history ... ok
+test utils::test::test_sign_extend ... ok
+test utils::test::test_truncate ... ok
+test rvdb::commands::tests::test_breakpoint_ops ... ok
+test board::virt::tests::test_clint_timer_interrupt ... ok
+test rvdb::printer::tests::format_asm_uses_conventional_memory_operands ... ok
+test rvdb::session::tests::run_script_reports_errors_and_stops_on_exit ... ok
+test rvdb::native_repl::test::drop_should_not_hang ... ok
+test board::virt::tests::test_clint_mmio_access ... ok
+test rvdb::commands::tests::parse_commands ... ok
+test board::virt::tests::sample_timer_rearms_after_control_reset ... ok
+test device::sample_timer::tests::timer_task_cancel_keeps_the_task_available_for_rescheduling ... ok
+test device::uart16550a::io::output_tests::cancellation_preserves_all_queued_bytes ... ok
+test isa::riscv::executor::test::test_exec_arith ... ok
+
+test result: ok. 319 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+     Running unittests src/main.rs (target/debug/build/here/273c6decfacd7a7b/out/here-273c6decfacd7a7b)
+
+running 10 tests
+test arg_tests::gdb_defaults_to_tcp_port_1234 ... ok
+test version::tests::dev ... ok
+test arg_tests::gdb_tcp_and_uds_are_mutually_exclusive ... ok
+test arg_tests::gdb_tcp_port_is_configurable ... ok
+test version::tests::prerelease ... ok
+test version::tests::dev_prerelease ... ok
+test version::tests::stable_release ... ok
+test arg_tests::gdb_uds_path_is_configurable ... ok
+test arg_tests::non_terminal_rvdb_is_script_only ... ok
+test arg_tests::terminal_rvdb_stays_interactive_after_optional_script ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli_nonterminal.rs (target/debug/build/here/0f8ee6df87f9cc38/out/cli_nonterminal-0f8ee6df87f9cc38)
+
+running 2 tests
+test normal_mode_runs_with_redirected_stdio ... ok
+test immediate_poweroff_preserves_uart_output ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/riscv_tests.rs (target/debug/build/here/8254641ab0a284d8/out/riscv_tests-8254641ab0a284d8)
+
+running 8 tests
+test rv64_tests::run_rv64uc ... ok
+test rv64_tests::run_rv64si_p ... ok
+test rv64_tests::run_rv64mi_p ... ok
+test rv64_tests::run_rv64um ... ok
+test rv64_tests::run_rv64uf ... ok
+test rv64_tests::run_rv64ud ... ok
+test rv64_tests::run_rv64ua ... ok
+test rv64_tests::run_rv64ui ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.92s
+
+     Running tests/virtio_rng.rs (target/debug/build/here/1509e616532d9d21/out/virtio_rng-1509e616532d9d21)
+
+running 6 tests
+test entropy_fills_a_scattered_descriptor_chain ... ok
+test entropy_caps_a_large_request_without_overwriting_its_tail ... ok
+test entropy_rejects_device_readable_buffers ... ok
+test entropy_source_failure_requests_reset_and_preserves_guest_data ... ok
+test entropy_dma_interrupt_ack_and_reset ... ok
+test entropy_reset_waits_for_an_outstanding_request ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+EXIT_CODE=0

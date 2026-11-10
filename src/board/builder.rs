@@ -303,8 +303,10 @@ mod native {
     use crate::{
         DeviceConfig,
         device::virtio::{
-            virtio_block::VirtIOBlkDeviceBuilder, virtio_device::VirtIODeviceEnum,
+            virtio_block::VirtIOBlkDeviceBuilder,
+            virtio_device::{VirtIODeviceEnum, VirtIODeviceTrait},
             virtio_mmio::VirtIOMMIO,
+            virtio_rng::VirtIORngDevice,
         },
     };
 
@@ -316,10 +318,10 @@ mod native {
             irq: PeriphIrqId,
             config: DeviceConfig,
         ) -> Self {
-            let virtio_device = match config.dev_type {
+            let virtio_device: Box<UnsafeCell<dyn VirtIODeviceTrait>> = match config.dev_type {
                 VirtIODeviceEnum::VirtIOBlock => {
                     let ram_base = unsafe { &mut self.ram_ref.as_mut_unchecked()[0] as *mut u8 };
-                    VirtIOBlkDeviceBuilder::new(
+                    let device = VirtIOBlkDeviceBuilder::new(
                         ram_base,
                         String::from(config.path.to_str().unwrap()),
                     )
@@ -327,13 +329,22 @@ mod native {
                         crate::device::virtio::virtio_block::VirtIOBlockFeature::BlockSize,
                     )
                     .host_feature(crate::device::virtio::virtio_block::VirtIOBlockFeature::Flush)
-                    .get_and_spawner_task(&mut self.spawner)
+                    .get_and_spawner_task(&mut self.spawner);
+                    Box::new(UnsafeCell::new(device))
+                }
+                VirtIODeviceEnum::VirtIORng => {
+                    let ram_base = unsafe { &mut self.ram_ref.as_mut_unchecked()[0] as *mut u8 };
+                    Box::new(UnsafeCell::new(VirtIORngDevice::new(
+                        ram_base,
+                        &config.path,
+                        &mut self.spawner,
+                    )))
                 }
                 dev_type => {
                     panic!("unsupport device: {:#?}", dev_type);
                 }
             };
-            let virtio_mmio_device = VirtIOMMIO::new(Box::new(UnsafeCell::new(virtio_device)));
+            let virtio_mmio_device = VirtIOMMIO::new(virtio_device);
             self.add_plic_device(Box::new(virtio_mmio_device), base, size, irq)
         }
     }

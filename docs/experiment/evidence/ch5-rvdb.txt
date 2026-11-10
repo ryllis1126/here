@@ -1,0 +1,118 @@
+COMMAND: ['target/release/here', 'test_resources/bin/main.elf', '-g', '-S', 'scripts/ch0.rvdb']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+(rvdb) help
+Inspect and control a running RISC-V guest.
+
+Usage: <COMMAND>
+
+Commands:
+  print        Print registers, memory, and other CPU state [alias: p]
+  display      Print an item whenever guest execution stops [alias: d]
+  translate    Translate a virtual address using the current CPU and page-table state [aliases: t, trans]
+  undisplay    Stop printing an item whenever guest execution stops
+  list         Disassemble instructions starting at the current PC [aliases: l, ls]
+  history      Show recently executed instructions [alias: his]
+  ftrace       Record and inspect function calls and returns [alias: ft]
+  symbol-file  Load debug symbols from an ELF file [aliases: symbol, file]
+  step         Execute one guest instruction [aliases: s, si]
+  continue     Resume guest execution with an optional maximum steps [alias: c]
+  break        Set a breakpoint, or delete one with --delete [alias: b]
+  info         Show debugger state such as breakpoints and loaded symbols
+  quit         Quit rvdb [aliases: q, exit]
+  help         Print this message or the help of the given subcommand(s)
+
+Addresses are physical unless --virt is specified.
+Enter an empty line to repeat the previous command.
+(rvdb) p pc
+pc = 0x80000000
+(rvdb) p reg sp
+sp  = 0x00000000
+(rvdb) p regs --start 0 --len 8
+x0   zero  = 0x00000000
+x1   ra    = 0x00000000
+x2   sp    = 0x00000000
+x3   gp    = 0x00000000
+x4   tp    = 0x00000000
+x5   t0    = 0x00000000
+x6   t1    = 0x00000000
+x7   t2    = 0x00000000
+(rvdb) p mem 0x80000000 --len 16
+paddr(0x80000000): 17 a1 01 00 13 01 01 00 17 55 00 00 13 05 85 ff
+(rvdb) l
+> 0x80000000: 0x0001a117 auipc sp, 26 _start
+  0x80000004: 0x00010113 mv sp, sp
+  0x80000008: 0x00005517 auipc a0, 5
+  0x8000000c: 0xff850513 addi a0, a0, -8
+  0x80000010: 0x0000a597 auipc a1, 10
+  0x80000014: 0xff058593 addi a1, a1, -16
+  0x80000018: 0x00b50863 beq a0, a1, 16
+  0x8000001c: 0x00053023 sd zero, 0(a0)
+  0x80000020: 0x00850513 addi a0, a0, 8
+  0x80000024: 0xff5ff06f j -12
+  0x80000028: 0x0c8010ef jal ra, 4296
+  0x8000002c: 0x05d00893 li a7, 93
+  0x80000030: 0x00000513 li a0, 0
+  0x80000034: 0x00000073 ecall
+  0x80000038: 0x0000     illegal
+  0x8000003a: 0x0000     illegal
+  0x8000003c: 0x0000     illegal
+  0x8000003e: 0x0000     illegal
+  0x80000040: 0x0000     illegal
+  0x80000042: 0x0000     illegal
+(rvdb) s
+Completed, next: 0x80000004: mv sp, sp
+(rvdb) p pc
+pc = 0x80000004
+(rvdb) b main
+Breakpoint set at main <paddr(0x800010f0)>
+(rvdb) info breakpoints
+ 0: paddr(0x800010f0)
+(rvdb) c 100000
+Breakpoint hit after 10247 steps: 0x800010f0: addi sp, sp, -16 main
+(rvdb) p pc
+pc = 0x800010f0
+(rvdb) p reg sp
+sp  = 0x8001a000
+(rvdb) l
+> 0x800010f0: 0xff010113 addi sp, sp, -16 main
+  0x800010f4: 0x00113423 sd ra, 8(sp)
+  0x800010f8: 0x00813023 sd s0/fp, 0(sp)
+  0x800010fc: 0x01010413 addi s0/fp, sp, 16
+  0x80001100: 0x00002517 auipc a0, 2
+  0x80001104: 0xfa050513 addi a0, a0, -96
+  0x80001108: 0x779000ef jal ra, 3960
+  0x8000110c: 0xef5ff0ef jal ra, -268
+  0x80001110: 0x00002797 auipc a5, 2
+  0x80001114: 0xfa078793 addi a5, a5, -96
+  0x80001118: 0x06300713 li a4, 99
+  0x8000111c: 0x00f00693 li a3, 15
+  0x80001120: 0x0ff00613 li a2, 255
+  0x80001124: 0x00100593 li a1, 1
+  0x80001128: 0x00002517 auipc a0, 2
+  0x8000112c: 0xf9050513 addi a0, a0, -112
+  0x80001130: 0x691000ef jal ra, 3728
+  0x80001134: 0x00002597 auipc a1, 2
+  0x80001138: 0xfb458593 addi a1, a1, -76
+  0x8000113c: 0x00000513 li a0, 0
+(rvdb) b --delete main
+Breakpoint removed at main <paddr(0x800010f0)>
+(rvdb) s
+Completed, next: 0x800010f4: sd ra, 8(sp)
+(rvdb) p pc
+pc = 0x800010f4
+(rvdb) history 4
+  [ 0] 0x80000024: j -12
+  [ 1] 0x80000018: beq a0, a1, 16
+  [ 2] 0x80000028: jal ra, 4296
+  [ 3] 0x800010f0: addi sp, sp, -16 main
+(rvdb) q
+Used time: 0.002162s
+
+EXIT_CODE=0

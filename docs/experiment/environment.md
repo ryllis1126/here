@@ -16,3 +16,7 @@
 - 13个裸机ELF强制重新编译；rv64测试套件8组覆盖238 ELF通过。
 - rvdb/GDB真实会话通过；本机TCP权限通过工具批准。
 - Git身份仅本仓库设置为已连接账号kaze-1126及对应GitHub noreply邮箱；origin和master推送目标不变，upstream仍禁用。
+
+## Chapter 5 Linux工具
+
+使用相同nightly和交叉工具链。`scripts/setup-linux.sh`在项目缓存保存校验过SHA256的官方OpenSBI v1.5.1/Linux BusyBox固件和Ubuntu dtc1.7.0包；仅dpkg-deb解包，没有安装系统包。`bash scripts/lab.sh dtc`实际编译DTB通过。WSL中`gh auth status`沙箱内外均仍显示未登录，所有推送继续暂停。
