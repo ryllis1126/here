@@ -78,6 +78,6 @@ quit
 CALCULATOR BYE
 
 
-Used time: 0.002796s
+Used time: 0.002648s
 
 EXIT_CODE=0

@@ -1,0 +1,40 @@
+COMMAND: cargo test --locked cancellation_preserves_all_queued_bytes
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+warning: `here` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.48s
+     Running unittests src/lib.rs (target/debug/build/here/80c9898b78e8c199/out/here-80c9898b78e8c199)
+
+running 1 test
+test device::uart16550a::io::output_tests::cancellation_preserves_all_queued_bytes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 318 filtered out; finished in 0.08s
+
+     Running unittests src/main.rs (target/debug/build/here/273c6decfacd7a7b/out/here-273c6decfacd7a7b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.00s
+
+     Running tests/cli_nonterminal.rs (target/debug/build/here/0f8ee6df87f9cc38/out/cli_nonterminal-0f8ee6df87f9cc38)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/riscv_tests.rs (target/debug/build/here/8254641ab0a284d8/out/riscv_tests-8254641ab0a284d8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+
+EXIT_CODE=0

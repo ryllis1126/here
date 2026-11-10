@@ -1,0 +1,21 @@
+COMMAND: cargo test --locked --test cli_nonterminal
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running tests/cli_nonterminal.rs (target/debug/build/here/0f8ee6df87f9cc38/out/cli_nonterminal-0f8ee6df87f9cc38)
+
+running 2 tests
+test normal_mode_runs_with_redirected_stdio ... ok
+test immediate_poweroff_preserves_uart_output ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+EXIT_CODE=0

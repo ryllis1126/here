@@ -7,6 +7,8 @@
 | CLI-NOTTY | main无条件开启rawmode，重定向运行退出2 | 1/3 | 已解决：回归先红后绿；仅TTY开启guard；完整回归通过 |
 | GIT-AUTH | origin push退出128：HTTPS未配置可用凭据，无TTY可输入用户名 | 0/3 | 人工事项：用户在WSL配置GitHub Git认证并明确告知后再恢复；已停止所有推送，本地继续 |
 | BOOT-BSS | boot.S标注清BSS却遍历栈；热重启写脏BSS测试实际失败 | 1/3 | 已解决：startbss/endbss，修复前FAIL、修复后PASS；.data保留，完整回归通过 |
+| UART-EXIT | DeviceTask默认cancel分支丢弃UART worker，末尾输出间歇丢失；8192字节预取消实测只写0字节 | 1/3 | 已解决：关闭并排空接收队列，339/344项和连续20次C回归通过，独立审查通过；补充版本ch3-fix1 |
+| CH3-GATE | 验证进程尚未结束即触发Git，ch3 Tag含一次缺PASS输出的失败证据 | — | 保留历史与Tag，明确标记原Tag问题；补充修复提交，不覆盖Tag；后续Git关卡使用set-e并等待全部验证终态 |
 
 调试验证脚本修正：rvdb使用当前history命令；GDB用break *main比较精确入口，避免源码断点跳过序言。网络DNS和本机TCP沙箱限制均经批准处理，没有计作代码修复失败。
 

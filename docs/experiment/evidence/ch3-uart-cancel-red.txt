@@ -1,0 +1,37 @@
+COMMAND: cargo test --locked cancellation_preserves_all_queued_bytes
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+warning: `here` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.16s
+     Running unittests src/lib.rs (target/debug/build/here/80c9898b78e8c199/out/here-80c9898b78e8c199)
+
+running 1 test
+test device::uart16550a::io::output_tests::cancellation_preserves_all_queued_bytes ... FAILED
+
+failures:
+
+---- device::uart16550a::io::output_tests::cancellation_preserves_all_queued_bytes stdout ----
+
+thread 'device::uart16550a::io::output_tests::cancellation_preserves_all_queued_bytes' (1173) panicked at src/device/uart16550a/io.rs:127:13:
+assertion `left == right` failed: UART cancellation lost bytes
+  left: 0
+ right: 8192
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    device::uart16550a::io::output_tests::cancellation_preserves_all_queued_bytes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 318 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`
+
+EXIT_CODE=101

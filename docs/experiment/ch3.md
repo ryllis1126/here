@@ -1,6 +1,6 @@
 # Chapter 0x03：字节差分后端与参考模型
 
-状态：后端实现、实测及独立审查通过；本地里程碑ch3，推送暂停。
+状态：算术后端验收通过；原ch3在恢复复跑时发现UART退出竞态，须使用后续补充修复版本，推送暂停。
 
 ## 目标、来源和方案
 
@@ -44,4 +44,14 @@ cargo fmt --all -- --check
 
 ## Git与未完成项
 
-前章Commit5f02412、Annotated ch2。本章由Annotated ch3定位，实际SHA创建后写progress.md。后端功能验收无未完成项；origin认证未解决，所有推送继续暂停。
+前章Commit5f02412、Annotated ch2。原Chapter3为65b5a51/Annotated ch3，保留不覆盖。恢复后的C验证曾丢失全部末尾UART文本，但主代理在验证进程结束前错误启动提交，导致该Tag内证据包含缺失PASS文本的一次失败运行；原先成功运行不能代替此次复跑，不将该Tag宣称为最终稳定验收版本。
+
+### 补充修复：UART退出排空
+
+根因是DeviceTask默认取消select可在输出和取消同时就绪时直接丢弃UART worker Future。UartBytePort现在显式处理取消：关闭接收端防止新消息，排空所有已排队字节并flush，再结束任务。保留run_simple接口，不改变其他设备的取消行为。
+
+回归先红后绿：取消与8192字节输出同时就绪，原逻辑实际输出0字节；修复后逐字节一致。增加CLI真实16384字节突发后立即poweroff，检查无丢失；测试以并发读取stdout/stderr避免管道填满，并设置15秒宿主限制。
+
+补充后的[default339项](evidence/ch3-fix-default-tests.txt)、[custom344项](evidence/ch3-fix-custom-tests.txt)全绿（均0失败/0忽略），1056次C参考比较、UART计算器和BSS回归通过。20次独立真实模拟器运行全部通过，合计21120次C对照。补充独立审查确认无剩余问题。历史ch3不重打，补充版本使用新Annotated Tag `ch3-fix1`，以 `git rev-parse 'ch3-fix1^{commit}'` 定位，不改写历史。
+
+证据：[原Tag缺失输出](evidence/ch3-uart-loss-before.txt)、[取消回归先红](evidence/ch3-uart-cancel-red.txt)、[转绿](evidence/ch3-uart-cancel-green.txt)、[CLI突发输出](evidence/ch3-uart-cli-green.txt)、[重复真实运行](evidence/ch3-uart-stress.txt)。origin认证未解决，所有推送继续暂停。

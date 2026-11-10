@@ -65,33 +65,77 @@ impl UartBytePort {
 
 #[cfg(feature = "native-cli")]
 impl DeviceTask for UartBytePort {
-    async fn run_simple(mut self) {
-        use std::io::Write;
+    async fn run(self, cancel: tokio::sync::watch::Receiver<bool>) {
+        if let Err(error) = forward_output(self.output_rx, cancel, std::io::stdout()).await {
+            log::error!("failed to write UART output to stdout: {error}");
+        }
+    }
 
-        let mut buffer = [0u8; 4096];
-        while let Some(byte) = self.output_rx.recv().await {
-            buffer[0] = byte;
-            let mut len = 1;
-            while len < buffer.len() {
-                match self.output_rx.try_recv() {
-                    Ok(byte) => {
-                        buffer[len] = byte;
-                        len += 1;
-                    }
-                    Err(_) => break,
+    async fn run_simple(self) {
+        let (_keep_open, cancel) = tokio::sync::watch::channel(false);
+        self.run(cancel).await;
+    }
+}
+
+#[cfg(feature = "native-cli")]
+async fn forward_output<W: std::io::Write>(
+    mut receiver: UnboundedReceiver<u8>,
+    mut cancel: tokio::sync::watch::Receiver<bool>,
+    mut writer: W,
+) -> std::io::Result<W> {
+    let mut buffer = [0u8; 4096];
+    loop {
+        let byte = tokio::select! {
+            biased;
+            _ = cancel.changed() => {
+                // Stop accepting new output, then drain every already-queued byte.
+                receiver.close();
+                receiver.recv().await
+            }
+            byte = receiver.recv() => byte,
+        };
+        let Some(byte) = byte else { break };
+        buffer[0] = byte;
+        let mut len = 1;
+        while len < buffer.len() {
+            match receiver.try_recv() {
+                Ok(byte) => {
+                    buffer[len] = byte;
+                    len += 1;
                 }
+                Err(_) => break,
             }
+        }
 
-            let result = (|| -> std::io::Result<()> {
-                let mut stdout = std::io::stdout().lock();
-                stdout.write_all(&buffer[..len])?;
-                stdout.flush()
-            })();
+        writer.write_all(&buffer[..len])?;
+        writer.flush()?;
+    }
+    Ok(writer)
+}
 
-            if let Err(error) = result {
-                log::error!("failed to write UART output to stdout: {error}");
-                return;
+#[cfg(all(test, feature = "native-cli"))]
+mod output_tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn cancellation_preserves_all_queued_bytes() {
+        // Both branches are ready; every permitted select order must retain data.
+        for _ in 0..64 {
+            let (sender, receiver) = tokio::sync::mpsc::unbounded_channel();
+            let expected: Vec<u8> = (0..8192).map(|i| (i % 251) as u8).collect();
+            for &byte in &expected {
+                sender.send(byte).unwrap();
             }
+            let (cancel_tx, cancel_rx) = tokio::sync::watch::channel(false);
+            cancel_tx.send(true).unwrap();
+            let actual = forward_output(receiver, cancel_rx, Vec::new())
+                .await
+                .unwrap();
+            assert_eq!(actual.len(), expected.len(), "UART cancellation lost bytes");
+            assert_eq!(
+                actual, expected,
+                "UART cancellation discarded queued output"
+            );
         }
     }
 }
