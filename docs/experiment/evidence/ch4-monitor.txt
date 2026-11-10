@@ -1,0 +1,90 @@
+COMMAND: ['target/release/here', 'test_resources/bin/lab_monitor.elf', '--max-cycles', '20000000']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+MONITOR START: M-mode launches U-mode tasks
+
+ECALL cause=0x8 pc=0x80001164 tval=0x0 MPP=0
+
+ASWITCH from=0 to=2 reason=trap priority=2
+
+HSWITCH from=2 to=3 reason=trap priority=1
+
+ILLEGAL cause=0x2 pc=0x80001458 tval=0xfff00073
+
+ILLEGAL cause=0x2 pc=0x80001468 tval=0x30002573
+
+SWITCH from=3 to=0 reason=trap priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+BSWITCH from=1 to=2 reason=timer priority=2
+
+SWITCH from=2 to=0 reason=trap priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=timer priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=trap priority=1
+
+SWITCH from=1 to=0 reason=timer priority=1
+
+SWITCH from=0 to=1 reason=trap priority=1
+
+SWITCH from=1 to=4 reason=trap priority=-1
+
+SWITCH from=4 to=0 reason=timer priority=1
+
+SWITCH from=0 to=4 reason=trap priority=-1
+
+SWITCH from=4 to=1 reason=timer priority=1
+
+
+CSR ECALL PASS
+
+CSR ILLEGAL SKIP PASS
+
+CSR ILLEGAL KILL PASS
+
+PREEMPT PRIORITY PASS
+
+ROUND ROBIN PASS ticks0=7 ticks1=8 switches=14
+
+SLEEP IDLE PASS entries=2 wakeups=3
+
+CONTEXT TP PASS
+
+SPAWN EXIT PASS
+
+MONITOR PASS
+
+
+Used time: 0.016885s
+
+EXIT_CODE=0

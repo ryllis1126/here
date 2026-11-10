@@ -9,6 +9,7 @@
 | BOOT-BSS | boot.S标注清BSS却遍历栈；热重启写脏BSS测试实际失败 | 1/3 | 已解决：startbss/endbss，修复前FAIL、修复后PASS；.data保留，完整回归通过 |
 | UART-EXIT | DeviceTask默认cancel分支丢弃UART worker，末尾输出间歇丢失；8192字节预取消实测只写0字节 | 1/3 | 已解决：关闭并排空接收队列，339/344项和连续20次C回归通过，独立审查通过；补充版本ch3-fix1 |
 | CH3-GATE | 验证进程尚未结束即触发Git，ch3 Tag含一次缺PASS输出的失败证据 | — | 保留历史与Tag，明确标记原Tag问题；补充修复提交，不覆盖Tag；后续Git关卡使用set-e并等待全部验证终态 |
+| TRAP-TP | 原trap.S不保存/恢复tp，U任务初次上下文断言实际失败 | 1/3 | 已解决：保存x0/tp并恢复tp，monitor与原ecall/trap/CLINT示例、全套及前章回归通过 |
 
 调试验证脚本修正：rvdb使用当前history命令；GDB用break *main比较精确入口，避免源码断点跳过序言。网络DNS和本机TCP沙箱限制均经批准处理，没有计作代码修复失败。
 

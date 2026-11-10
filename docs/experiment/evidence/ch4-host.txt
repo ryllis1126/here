@@ -1,0 +1,21 @@
+COMMAND: ['/home/kazemiyuuka/projects/riscv/here/.cache/lab/calculator-host']
+CALCULATOR READY
+COMMANDS: add sub mul div; help; quit
+RESULT 5
+RESULT -42
+RESULT -2
+RESULT -2147483648
+ERROR overflow
+ERROR overflow
+ERROR overflow
+ERROR overflow
+ERROR division by zero
+ERROR syntax
+ERROR syntax
+ERROR syntax
+ERROR syntax
+ERROR input too long
+RESULT 42
+CALCULATOR BYE
+
+EXIT_CODE=0

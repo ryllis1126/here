@@ -1,6 +1,6 @@
 # 持续执行进度
 
-当前：Chapter3的UART补充修复、全套回归和独立审查通过，保存新ch3-fix1里程碑后实施Chapter4。原ch3保留不覆盖。origin认证阻塞，继续停止全部推送。
+当前：Chapter4必做及优先级扩展实测/独立审查通过，保存本地ch4后实施Chapter5。用户反馈可能已配置gh，但WSL内外gh auth status均仍未登录，已反馈需WSL单独认证，继续暂停推送。
 
 基础HEAD：7cd34e277692c5fe6c5a9959b3206e0cff0808ff。2026-11-10开始时master干净、origin/upstream同步，upstream push禁用。
 
@@ -20,6 +20,7 @@
 - Task 5本地验收通过：PSUB8/PABSDIFF8编码/JSON/生成/译码/响应日志/C调用链；新测试先红后绿，default337和custom339项全绿0忽略；原display样例取消忽略并加强PC/退休断言；Chapter1回归通过。独立审查及隔离复跑无问题。
 - Task 6本地验收通过：两个ExecTrait后端，通道/x0/alias/PC环绕/退休/流水测试先红后绿；1056次C参考比较和每指令528条日志；default337/custom342项全绿，前章回归通过。Makefile头文件依赖及库规则$<问题已实测修复，独立审查确认无剩余问题。
 - Chapter3补充：UART退出取消丢队列已修复，8192字节取消测试先红后绿，16384字节真实CLI突发输出完整；default339/custom344项通过，C对照连续20次模拟器运行通过，独立审查无剩余问题。原ch3内的一次失败证据如实保留，补充Tag ch3-fix1不覆盖原Tag。后续提交关卡使用set-e串行验收并等待命令终态。
+- Task 7本地验收通过：4个U任务/M monitor与idle、ecall服务、非法指令跳过/非法CSR终止、精确CSR/nm对照，CLINT轮转7/8次、14次公平切换，优先级创建/唤醒抢占、sleep/yield/exit；tp回归先红后绿，339/344项及原示例/前章回归通过，独立审查无问题。
 
 ## 章节提交索引
 
@@ -29,5 +30,6 @@
 | 0x01 | 02d8f9c | ch1 | 按要求暂停推送 |
 | 0x02 | 5f02412 | ch2 | 按要求暂停推送 |
 | 0x03原始 | 65b5a51 | ch3 | 原Tag含UART竞态失败运行，保留待补充修复；暂停推送 |
+| 0x03补充验收 | fa18065 | ch3-fix1 | 339/344项及20次C运行通过；WSL认证待恢复 |
 
 首次推送命令：git push --atomic origin refs/heads/master:refs/heads/master refs/tags/ch0:refs/tags/ch0，退出128：could not read Username for https://github.com。已通知用户在WSL配置身份认证，未请求在聊天发送凭据。认证恢复前继续本地实验，不重试推送。

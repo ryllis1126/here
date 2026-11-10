@@ -16,10 +16,11 @@ __traps_entry:
     # allocate a TrapContext on kernel stack
     addi sp, sp, -34*8
     # save general-purpose registers
+    sd x0, 0*8(sp)
     sd x1, 1*8(sp)
     # skip sp(x2), we will save it later
     sd x3, 3*8(sp)
-    # skip tp(x4), application does not use it
+    sd x4, 4*8(sp)
     # save x5~x31
     .set n, 5
     .rept 27
@@ -51,9 +52,10 @@ __traps_return:
     csrw mstatus, t0
     csrw mepc, t1
     csrw mscratch, t2
-    # restore general-purpuse registers except sp/tp
+    # restore general-purpose registers except sp
     ld x1, 1*8(sp)
     ld x3, 3*8(sp)
+    ld x4, 4*8(sp)
     .set n, 5
     .rept 27
         LOAD_REG %n
