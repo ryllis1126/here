@@ -316,6 +316,10 @@ pub(in crate::isa::riscv) fn get_exec_func(
         // RV_Custom
         //---------------------------------------
         #[cfg(feature = "custom-instr")]
+        RiscvInstr::PSUB8 => super::exec_custom::exec_psub8,
+        #[cfg(feature = "custom-instr")]
+        RiscvInstr::PABSDIFF8 => super::exec_custom::exec_pabsdiff8,
+        #[cfg(feature = "custom-instr")]
         RiscvInstr::MY_INSTR0_R => todo!(),
         #[cfg(feature = "custom-instr")]
         RiscvInstr::MY_INSTR1_DISPLAY => |info, cpu| {

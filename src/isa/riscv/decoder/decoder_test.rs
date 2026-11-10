@@ -111,6 +111,68 @@ fn test_default_decoder_excludes_vector() {
     checker.check_illegal(get_instr_v(0x57, 0b000, 0b010001, true, 1, 2, 3));
 }
 
+#[cfg(feature = "custom-instr")]
+#[test]
+fn test_lab_custom_byte_diff_decode() {
+    let decoder = Decoder::new();
+    for (raw, name, info) in [
+        (
+            0x0020_a18b,
+            "PSUB8",
+            RVInstrInfo::R {
+                rd: 3,
+                rs1: 1,
+                rs2: 2,
+            },
+        ),
+        (
+            0x0020_b18b,
+            "PABSDIFF8",
+            RVInstrInfo::R {
+                rd: 3,
+                rs1: 1,
+                rs2: 2,
+            },
+        ),
+        (
+            0x01f0_2f8b,
+            "PSUB8",
+            RVInstrInfo::R {
+                rd: 31,
+                rs1: 0,
+                rs2: 31,
+            },
+        ),
+        (
+            0x000f_b00b,
+            "PABSDIFF8",
+            RVInstrInfo::R {
+                rd: 0,
+                rs1: 31,
+                rs2: 0,
+            },
+        ),
+    ] {
+        let decoded = decoder
+            .decode(raw.into())
+            .expect("lab instruction must decode");
+        assert_eq!(format!("{:?}", decoded.instr), name);
+        assert_eq!(decoded.info, info);
+        assert_eq!(decoded.len, 4);
+    }
+    // A changed fixed funct7 or a neighboring unused funct3 must remain illegal.
+    assert!(decoder.decode(0x0220_a18b_u32.into()).is_none());
+    assert!(decoder.decode(0x0020_c18b_u32.into()).is_none());
+}
+
+#[cfg(not(feature = "custom-instr"))]
+#[test]
+fn test_lab_custom_byte_diff_requires_feature() {
+    let decoder = Decoder::new();
+    assert!(decoder.decode(0x0020_a18b_u32.into()).is_none());
+    assert!(decoder.decode(0x0020_b18b_u32.into()).is_none());
+}
+
 #[test]
 fn test_decoder_rv32i() {
     let mut checker = Checker::new();

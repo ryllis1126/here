@@ -15,6 +15,7 @@ debug_tools = import_module("check-debuggers")
 save = debug_tools.save
 capture = debug_tools.capture
 EVIDENCE = debug_tools.EVIDENCE
+PREFIX = os.environ.get("HERE_LAB_CHAPTER", "ch1")
 
 CASES = [
     ("help", "COMMANDS: add sub mul div; help; quit"),
@@ -42,10 +43,10 @@ def host_test():
     target = ROOT / ".cache/lab/calculator-host"
     command = ["cc", "-std=c11", "-Wall", "-Wextra", "-Werror", "-O2",
                "-fsanitize=undefined", "-DHOST_TEST", str(source), "-o", str(target)]
-    result = capture(command, "ch1-host-build.txt", 30)
+    result = capture(command, f"{PREFIX}-host-build.txt", 30)
     assert result.returncode == 0, result.stderr
     data = "\n".join(command for command, _ in CASES) + "\nquit\n"
-    result = capture([str(target)], "ch1-host.txt", 10, input=data)
+    result = capture([str(target)], f"{PREFIX}-host.txt", 10, input=data)
     assert result.returncode == 0 and not result.stderr, result.stderr
     actual = [line.strip() for line in result.stdout.splitlines()
               if line.startswith(("RESULT", "ERROR", "COMMANDS"))]
@@ -56,7 +57,7 @@ def host_test():
 
 def startup_test():
     result = capture(["target/release/here", "test_resources/bin/lab_startup.elf",
-                      "--max-cycles", "200000"], "ch1-startup.txt", 15,
+                      "--max-cycles", "200000"], f"{PREFIX}-startup.txt", 15,
                      stdin=subprocess.DEVNULL)
     assert result.returncode == 0, result.stderr
     assert "STARTUP BSS PASS" in result.stdout, result.stdout
@@ -70,7 +71,7 @@ def guest_test():
     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT)
     transcript = bytearray()
-    path = EVIDENCE / "ch1-calculator-uart.txt"
+    path = EVIDENCE / f"{PREFIX}-calculator-uart.txt"
     save(path, f"COMMAND: {command!r}\nSTATUS=RUNNING")
     try:
         with selectors.DefaultSelector() as selector:

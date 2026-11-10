@@ -1,6 +1,8 @@
 mod exec_atomic_function;
 mod exec_compress_function;
 mod exec_core;
+#[cfg(feature = "custom-instr")]
+mod exec_custom;
 mod exec_float_function;
 mod exec_vector_function;
 

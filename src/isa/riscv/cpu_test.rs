@@ -746,7 +746,6 @@ fn test_rv_c_float() {
 }
 
 #[cfg(feature = "custom-instr")]
-#[ignore = "custom-instr"]
 #[test]
 fn test_custom_instr() {
     run_test_cpu_step(
@@ -755,8 +754,38 @@ fn test_custom_instr() {
             0b00000001010_00000_001_00000_0101011,
         ],
         |builder| builder,
-        |checker| checker,
+        |checker| {
+            checker
+                .pc(ram_config::BASE_ADDR + 8)
+                .csr(Minstret::get_index(), 2)
+        },
     );
+}
+
+#[cfg(feature = "custom-instr")]
+#[test]
+fn test_lab_custom_frontend_dispatch() {
+    for raw in [0x0020_a18b_u32, 0x0020_b18b_u32] {
+        run_test_exec_decode(
+            raw,
+            |builder| {
+                builder
+                    .reg(1, 0x0102)
+                    .reg(2, 0x0304)
+                    .reg(3, 0x55)
+                    .pc(ram_config::BASE_ADDR)
+            },
+            // Chapter 2 only proves dispatch and normal retirement, not arithmetic.
+            |checker| {
+                checker
+                    .reg(1, 0x0102)
+                    .reg(2, 0x0304)
+                    .reg(3, 0x55)
+                    .pc(ram_config::BASE_ADDR + 4)
+                    .csr(Minstret::get_index(), 1)
+            },
+        );
+    }
 }
 
 #[test]

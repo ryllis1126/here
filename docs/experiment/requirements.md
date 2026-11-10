@@ -7,7 +7,7 @@
 | [0x00.1](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch0.1/) | nightly兼容、交叉工具链/GDB、重建HERE/裸机、ISA ELF、完整Cargo测试 | 实测通过 |
 | [0x00.2](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch0.2/) | rvdb寄存器/内存/反汇编/步进/断点；GDB Remote真实会话 | 实测通过 |
 | [0x01](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch1/) | ABI/汇编/ELF/PT_LOAD/链接启动分析；个人终端程序移植与真实交互 | 实测/审查通过；推送暂停 |
-| [0x02](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch2/) | 自选一组指令编码/JSON/生成/译码/响应日志；Rust测试；C .insn API及裸机执行 | 待执行 |
+| [0x02](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch2/) | 自选一组指令编码/JSON/生成/译码/响应日志；Rust测试；C .insn API及裸机执行 | 前端实测/审查通过；推送暂停 |
 | [0x03](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch3/) | ExecTrait后端/路由；正常/0/全1/溢出/通道/x0/PC/流水依赖；C golden model | 待执行 |
 | [0x04](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch4/) | M monitor启动多个U任务；ecall输出/sleep/任务/退出；非ecall异常CSR与恢复；CLINT公平时间片；优先级扩展单列 | 待执行 |
 | [0x05](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch5/) | 新增Linux可识别实用设备；MMIO/注册/PLIC；按需后台/DMA/Acquire-Release；Rust/裸机/Linux验证 | 待执行 |

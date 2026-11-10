@@ -13,6 +13,20 @@
         "mask": "0xfe00707f"
     },
 
+    "psub8": {
+        "encoding": "0000000----------010-----0001011",
+        "variable_fields": ["rd", "rs1", "rs2"],
+        "extension": ["rv_custom0"],
+        "match": "0x200b",
+        "mask": "0xfe00707f"
+    },
+    "pabsdiff8": {
+        "encoding": "0000000----------011-----0001011",
+        "variable_fields": ["rd", "rs1", "rs2"],
+        "extension": ["rv_custom0"],
+        "match": "0x300b",
+        "mask": "0xfe00707f"
+    },
     "my_instr1_display": {
         "encoding": "-----------------001-----0101011",
         "variable_fields": [
