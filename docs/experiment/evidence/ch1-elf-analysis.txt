@@ -1,0 +1,156 @@
+COMMAND: riscv64-unknown-elf-readelf -h -l -S test_resources/bin/lab_calculator.elf; riscv64-unknown-elf-nm -n test_resources/bin/lab_calculator.elf
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           RISC-V
+  Version:                           0x1
+  Entry point address:               0x80000000
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          111464 (bytes into file)
+  Flags:                             0x4, double-float ABI
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         4
+  Size of section headers:           64 (bytes)
+  Number of section headers:         19
+  Section header string table index: 18
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .text             PROGBITS         0000000080000000  00001000
+       00000000000034a4  0000000000000000  AX       0     0     8
+  [ 2] .rodata           PROGBITS         0000000080004000  00005000
+       00000000000001c3  0000000000000000   A       0     0     8
+  [ 3] .data             PROGBITS         0000000080005000  00006000
+       0000000000000010  0000000000000000  WA       0     0     8
+  [ 4] .bss              NOBITS           0000000080006000  00006010
+       0000000000004088  0000000000000000  WA       0     0     8
+  [ 5] .stack            PROGBITS         000000008000b000  00006010
+       0000000000010000  0000000000000000           0     0     1
+  [ 6] .debug_info       PROGBITS         0000000000000000  00016010
+       0000000000001355  0000000000000000           0     0     1
+  [ 7] .debug_abbrev     PROGBITS         0000000000000000  00017365
+       000000000000069f  0000000000000000           0     0     1
+  [ 8] .debug_aranges    PROGBITS         0000000000000000  00017a10
+       0000000000000150  0000000000000000           0     0     16
+  [ 9] .debug_rnglists   PROGBITS         0000000000000000  00017b60
+       0000000000000017  0000000000000000           0     0     1
+  [10] .debug_line       PROGBITS         0000000000000000  00017b77
+       0000000000001b23  0000000000000000           0     0     1
+  [11] .debug_str        PROGBITS         0000000000000000  0001969a
+       000000000000053f  0000000000000001  MS       0     0     1
+  [12] .debug_line_str   PROGBITS         0000000000000000  00019bd9
+       0000000000000102  0000000000000001  MS       0     0     1
+  [13] .comment          PROGBITS         0000000000000000  00019cdb
+       0000000000000019  0000000000000001  MS       0     0     1
+  [14] .riscv.attributes RISCV_ATTRIBUTE  0000000000000000  00019cf4
+       0000000000000097  0000000000000000           0     0     1
+  [15] .debug_frame      PROGBITS         0000000000000000  00019d90
+       0000000000000870  0000000000000000           0     0     8
+  [16] .symtab           SYMTAB           0000000000000000  0001a600
+       0000000000000918  0000000000000018          17    42     8
+  [17] .strtab           STRTAB           0000000000000000  0001af18
+       000000000000038c  0000000000000000           0     0     1
+  [18] .shstrtab         STRTAB           0000000000000000  0001b2a4
+       00000000000000c3  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), p (processor specific)
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  RISCV_ATTRIBUT 0x0000000000019cf4 0x0000000000000000 0x0000000000000000
+                 0x0000000000000097 0x0000000000000000  R      0x1
+  LOAD           0x0000000000001000 0x0000000080000000 0x0000000080000000
+                 0x00000000000041c3 0x00000000000041c3  R E    0x1000
+  LOAD           0x0000000000006000 0x0000000080005000 0x0000000080005000
+                 0x0000000000000010 0x0000000000005088  RW     0x1000
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     .riscv.attributes
+   01     .text .rodata
+   02     .data .bss
+   03
+0000000000000020 a n
+0000000080000000 A BASE_ADDRESS
+0000000080000000 T _start
+0000000080000000 T startkernel
+0000000080000000 T starttext
+0000000080001000 t read_char
+0000000080001030 t equal
+00000000800010c0 t space
+0000000080001128 t read_line
+0000000080001220 t integer
+00000000800013cc t command
+000000008000170c T main
+00000000800017b4 T uart_putc
+000000008000185c T uart_getc
+0000000080001a64 T print_dec
+0000000080001bd8 T print_hex
+0000000080001d1c T print_oct
+0000000080001e34 T print_float
+00000000800020f8 T vprintf
+00000000800025d4 T printf
+0000000080002640 T print_str
+0000000080002694 T test_start
+00000000800026e0 T pass
+0000000080002718 T fail
+0000000080002738 T input_dec
+000000008000283c T input_float
+0000000080002a88 T input_char
+0000000080002b24 T scanf
+0000000080002dcc T Log
+0000000080002f60 T __traps_entry
+0000000080002ffc T __traps_return
+0000000080003098 T read_csr_mstatus
+00000000800030c8 T read_csr_mie
+00000000800030f8 T read_csr_mtvec
+0000000080003128 T read_csr_mscratch
+0000000080003158 T read_csr_mepc
+0000000080003188 T read_csr_mcause
+00000000800031b8 T read_csr_mtval
+00000000800031e8 T read_csr_mip
+0000000080003218 T write_csr_mstatus
+0000000080003244 T write_csr_mie
+0000000080003270 T write_csr_mtvec
+000000008000329c T write_csr_mscratch
+00000000800032c8 T write_csr_mepc
+00000000800032f4 T write_csr_mcause
+0000000080003320 T write_csr_mtval
+000000008000334c T write_csr_mip
+0000000080003378 W trap_handler
+00000000800033ec T trap_init
+0000000080003470 T PowerOff
+0000000080004000 R endtext
+0000000080004000 R startrodata
+0000000080005000 D endrodata
+0000000080005000 d glimpse
+0000000080005000 D startdata
+0000000080005008 D TRAP_CONTEXT
+0000000080006000 b buf_pos.2
+0000000080006000 B enddata
+0000000080006000 B sbss
+0000000080006000 B startbss
+0000000080006004 b buf_len.1
+0000000080006008 b linebuf.0
+0000000080006088 b TRAP_STACK
+000000008000b000 B endbss
+000000008000b000 N stack_lower_bound
+000000008001b000 B endkernel
+000000008001b000 N stack_top
+
+EXIT_CODE=0

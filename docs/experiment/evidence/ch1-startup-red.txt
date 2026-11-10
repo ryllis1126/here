@@ -1,0 +1,22 @@
+COMMAND: python3 scripts/check-calculator.py --startup-only (before fix)
+Traceback (most recent call last):
+  File "/home/kazemiyuuka/projects/riscv/here/scripts/check-calculator.py", line 114, in <module>
+    startup_test()
+  File "/home/kazemiyuuka/projects/riscv/here/scripts/check-calculator.py", line 62, in startup_test
+    assert "STARTUP BSS PASS" in result.stdout, result.stdout
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError:
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (7cd34e27)
+STARTUP BSS FAIL
+
+
+Used time: 0.000863s
+
+
+EXPECTED_FAILURE: STARTUP BSS FAIL

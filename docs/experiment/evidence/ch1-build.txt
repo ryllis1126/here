@@ -1,0 +1,37 @@
+COMMAND: make -C test_resources -j4
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/boot.o[0m
+[1;34mRV_CC      obj/lab_calculator.o[0m
+[1;34mRV_LD      bin/main.elf[0m
+[1;34mRV_LD      bin/fib.elf[0m
+[1;34mRV_LD      bin/prime.elf[0m
+[1;34mRV_LD      bin/matrix_mul.elf[0m
+[1;34mRV_LD      bin/vector_kernels.elf[0m
+[1;34mRV_LD      bin/io_bench.elf[0m
+[1;34mRV_LD      bin/trap_test.elf[0m
+[1;34mRV_LD      bin/virtio_blk_test.elf[0m
+[1;34mRV_LD      bin/ecall_test.elf[0m
+[1;34mRV_LD      bin/interrupt_test.elf[0m
+[1;34mRV_LD      bin/float.elf[0m
+[1;34mRV_LD      bin/clint.elf[0m
+[1;34mRV_LD      bin/uart_interrupt_test.elf[0m
+[1;34mRV_LD      bin/lab_startup.elf[0m
+[1;34mRV_LD      bin/lab_calculator.elf[0m
+[1;34mRV_DUMP    dump/main.dump[0m
+[1;34mRV_DUMP    dump/fib.dump[0m
+[1;34mRV_DUMP    dump/prime.dump[0m
+[1;34mRV_DUMP    dump/matrix_mul.dump[0m
+[1;34mRV_DUMP    dump/vector_kernels.dump[0m
+[1;34mRV_DUMP    dump/io_bench.dump[0m
+[1;34mRV_DUMP    dump/trap_test.dump[0m
+[1;34mRV_DUMP    dump/virtio_blk_test.dump[0m
+[1;34mRV_DUMP    dump/ecall_test.dump[0m
+[1;34mRV_DUMP    dump/interrupt_test.dump[0m
+[1;34mRV_DUMP    dump/float.dump[0m
+[1;34mRV_DUMP    dump/clint.dump[0m
+[1;34mRV_DUMP    dump/uart_interrupt_test.dump[0m
+[1;34mRV_DUMP    dump/lab_startup.dump[0m
+[1;34mRV_DUMP    dump/lab_calculator.dump[0m
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+
+EXIT_CODE=0

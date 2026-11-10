@@ -5,6 +5,8 @@
 | ENV-GDB | ldd缺libpython3.10，GDB不能启动 | 1/3 | 已解决：Ubuntu匹配ABI库项目内解包；--version和Remote会话通过 |
 | ENV-ISA | riscv-tests/isa无测试ELF | 1/3 | 已解决：GNU工具链构建，8组238ELF实际通过，无新增排除 |
 | CLI-NOTTY | main无条件开启rawmode，重定向运行退出2 | 1/3 | 已解决：回归先红后绿；仅TTY开启guard；完整回归通过 |
+| GIT-AUTH | origin push退出128：HTTPS未配置可用凭据，无TTY可输入用户名 | 0/3 | 人工事项：用户在WSL配置GitHub Git认证并明确告知后再恢复；已停止所有推送，本地继续 |
+| BOOT-BSS | boot.S标注清BSS却遍历栈；热重启写脏BSS测试实际失败 | 1/3 | 已解决：startbss/endbss，修复前FAIL、修复后PASS；.data保留，完整回归通过 |
 
 调试验证脚本修正：rvdb使用当前history命令；GDB用break *main比较精确入口，避免源码断点跳过序言。网络DNS和本机TCP沙箱限制均经批准处理，没有计作代码修复失败。
 

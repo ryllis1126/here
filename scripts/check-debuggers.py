@@ -11,6 +11,7 @@ os.chdir(ROOT)
 EVIDENCE = ROOT / "docs/experiment/evidence"
 EVIDENCE.mkdir(parents=True, exist_ok=True)
 ELF = "test_resources/bin/main.elf"
+PREFIX = os.environ.get("HERE_LAB_CHAPTER", "ch0")
 
 
 def save(path, text):
@@ -38,7 +39,7 @@ def capture(command, evidence_name, timeout, **kwargs):
 
 def run_rvdb():
     command = ["target/release/here", ELF, "-g", "-S", "scripts/ch0.rvdb"]
-    result = capture(command, "ch0-rvdb.txt", 20, stdin=subprocess.DEVNULL)
+    result = capture(command, f"{PREFIX}-rvdb.txt", 20, stdin=subprocess.DEVNULL)
     output = result.stdout + result.stderr
     assert result.returncode == 0, output
     for expected in ("pc = 0x80000000", "pc = 0x80000004", "Breakpoint set",
@@ -83,7 +84,7 @@ def run_gdb():
         ]
         for value in commands:
             command += ["-ex", value]
-        result = capture(command, "ch0-gdb.txt", 30)
+        result = capture(command, f"{PREFIX}-gdb.txt", 30)
         output = result.stdout + result.stderr
         assert result.returncode == 0, output
         for expected in ("INITIAL_PC=0x80000000", "STEP_PC=0x80000004", "AT_MAIN=1", "Breakpoint 1"):
@@ -101,7 +102,7 @@ def run_gdb():
                 server.kill()
                 remaining, _ = server.communicate()
             transcript.append(remaining)
-        save(EVIDENCE / "ch0-gdb-server.txt",
+        save(EVIDENCE / f"{PREFIX}-gdb-server.txt",
              f"COMMAND: {server_command!r}\n{''.join(transcript)}\nEXIT_CODE={server.returncode}\n")
 
 

@@ -4,8 +4,8 @@
 _start:
     la sp, stack_top        # 设置栈指针
     #clear bss
-    la a0, stack_lower_bound
-    la a1, stack_top
+    la a0, startbss
+    la a1, endbss
 1:
     beq a0, a1, 2f
     sd zero, 0(a0)

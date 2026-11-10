@@ -1,6 +1,6 @@
 # 持续执行进度
 
-当前：工作流和Chapter0实测完成，独立审查后整理提交/Tag/推送；随后进入Chapter1。
+当前：Chapter0与Chapter1本地验收通过；origin认证阻塞，停止全部推送。完成ch1本地里程碑后进入Chapter2。
 
 基础HEAD：7cd34e277692c5fe6c5a9959b3206e0cff0808ff。2026-11-10开始时master干净、origin/upstream同步，upstream push禁用。
 
@@ -16,7 +16,12 @@
 - Task 3调试完成：rvdb与RISC-V GDB Remote真实寄存器、内存、反汇编、步进和断点记录均通过，等待Git里程碑。
 - 独立审查修复：Cargo以进程组300秒timeout/5秒kill-after限制；CLI用Rust标准库限时等待15秒并回收，避免平台外部命令依赖；超时保留日志；下载.partial校验后rename。
 - Ruling（最终）：GDB不消费--max-cycles，采用原生stepi 40000计数推进，main断点提前命中且AT_MAIN=1；另有30秒宿主超时。真实复跑通过，无需修改GDB功能；此决定替代初拟仅宿主超时方案。
+- Task 4本地验收通过：宿主UBSan与HERE UART各16例；热重启BSS回归先红后绿；336项Cargo/ISA及rvdb/GDB回归通过；独立审查无问题。ch1提交由Tag定位，下一章记录实际SHA；所有推送继续暂停。
 
 ## 章节提交索引
 
-Chapter0全部实测通过；本章提交由Annotated ch0定位，下一次索引更新记录实际SHA和推送结果。创建前已检查本地和origin无ch0，不覆盖已有Tag。
+| 章节 | Commit | Annotated Tag | origin |
+|---|---|---|---|
+| 0x00.1+0x00.2 | 0826729 | ch0 | 推送失败：HTTPS无凭据；未重试 |
+
+首次推送命令：git push --atomic origin refs/heads/master:refs/heads/master refs/tags/ch0:refs/tags/ch0，退出128：could not read Username for https://github.com。已通知用户在WSL配置身份认证，未请求在聊天发送凭据。认证恢复前继续本地实验，不重试推送。
