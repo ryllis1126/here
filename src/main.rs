@@ -442,7 +442,7 @@ fn main() {
 
     let board = build_board(&cli_args);
 
-    let raw_mode_guard = RawModeGuard::new();
+    let raw_mode_guard = (stdin_terminal && stdout_terminal).then(RawModeGuard::new);
     let now = Instant::now();
 
     match mode {

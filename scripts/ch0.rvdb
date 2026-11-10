@@ -1,0 +1,19 @@
+help
+p pc
+p reg sp
+p regs --start 0 --len 8
+p mem 0x80000000 --len 16
+l
+s
+p pc
+b main
+info breakpoints
+c 100000
+p pc
+p reg sp
+l
+b --delete main
+s
+p pc
+history 4
+q

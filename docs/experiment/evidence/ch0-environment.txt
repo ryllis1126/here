@@ -1,0 +1,25 @@
+COMMAND: bash scripts/lab.sh env
+rustc: /home/kazemiyuuka/.cargo/bin/rustc
+cargo: /home/kazemiyuuka/.cargo/bin/cargo
+make: /usr/bin/make
+autoconf: /usr/bin/autoconf
+python3: /usr/bin/python3
+riscv64-unknown-elf-gcc: /opt/riscv/bin/riscv64-unknown-elf-gcc
+riscv64-unknown-elf-objdump: /opt/riscv/bin/riscv64-unknown-elf-objdump
+rustc 1.100.0-nightly (420ed2a0c 2026-09-18)
+cargo 1.100.0-nightly (495c385d0 2026-09-16)
+riscv64-unknown-elf-gcc (g1b306039a) 15.1.0
+GNU gdb (GDB) 16.3.90.20250610-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+## master...origin/master
+ M src/main.rs
+?? .agents/skills/here-lab/
+?? AGENTS.md
+?? docs/
+?? scripts/
+?? tests/cli_nonterminal.rs
+
+EXIT_CODE=0

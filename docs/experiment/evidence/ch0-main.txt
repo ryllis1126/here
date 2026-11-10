@@ -1,0 +1,41 @@
+LOG=.cache/lab/emulator-20261110T114247-3.log
+COMMAND: timeout --foreground 60 target/release/here test_resources/bin/main.elf --max-cycles 10000000
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (7cd34e27)
+========== START src/main.c ==========
+
+[34m[INFO] .text section: [0x80000000, 0x80003000][0m
+
+[34m[INFO] .rodata section: [0x80003000, 0x80004000][0m
+
+[34m[INFO] .data section: [0x80004000, 0x80005000][0m
+
+[34m[INFO] .bas section: [0x80005000, 0x8000a000][0m
+
+[34m[INFO] .stack section: [0x8000a000, 0x8001a000][0m
+
+Hello Qemu.
+
+format test:        1 0x000000ff   017 c test
+
+[31m[ERROR] error test.[0m
+
+[33m[WARN] warnning test.[0m
+
+[32m[DEBUG] debug test.[0m
+
+[34m[INFO] info test.[0m
+
+[90m[TRACE] trace test.[0m
+
+[32mPASS[0m
+
+
+Used time: 0.001280s
+EXIT_CODE=0
