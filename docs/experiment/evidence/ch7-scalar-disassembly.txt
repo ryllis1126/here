@@ -1,0 +1,23 @@
+COMMAND: ['/opt/riscv/bin/riscv64-unknown-elf-objdump', '-d', '.cache/lab/lab_rvv_scalar.o']
+
+.cache/lab/lab_rvv_scalar.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000000000000 <lab_axpy>:
+   0:	00070063          	beqz	a4,0 <lab_axpy>
+   4:	00271713          	slli	a4,a4,0x2
+   8:	00e50733          	add	a4,a0,a4
+   c:	0005a783          	lw	a5,0(a1)
+  10:	00062803          	lw	a6,0(a2)
+  14:	02d787b3          	mul	a5,a5,a3
+  18:	010787b3          	add	a5,a5,a6
+  1c:	00f52023          	sw	a5,0(a0)
+  20:	00450513          	addi	a0,a0,4
+  24:	00460613          	addi	a2,a2,4
+  28:	00458593          	addi	a1,a1,4
+  2c:	fee510e3          	bne	a0,a4,c <lab_axpy+0xc>
+  30:	00008067          	ret
+
+EXIT_CODE=0

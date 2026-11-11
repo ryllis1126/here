@@ -1,0 +1,45 @@
+COMMAND: ['target/release/here', 'test_resources/bin/ecall_test.elf', '--max-cycles', '1000000']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+========== START src/ecall_test.c ==========
+
+[0]: ecall_nr: 10
+
+	args:
+
+[1]: ecall_nr: 11
+
+	args:  1
+
+[2]: ecall_nr: 12
+
+	args:  1  2
+
+[3]: ecall_nr: 13
+
+	args:  1  2  3
+
+[4]: ecall_nr: 14
+
+	args:  1  2  3  4
+
+[5]: ecall_nr: 15
+
+	args:  1  2  3  4  5
+
+[6]: ecall_nr: 16
+
+	args:  1  2  3  4  5  6
+
+[32mPASS[0m
+
+
+Used time: 0.000913s
+
+EXIT_CODE=0

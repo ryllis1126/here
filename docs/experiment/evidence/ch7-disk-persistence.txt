@@ -1,0 +1,5 @@
+COMMAND: ['debugfs', '-R', 'cat /persistent.txt', '/home/kazemiyuuka/projects/riscv/here/.cache/images/busybox-ch6-final.img']
+HERE_EXT4_13af423bd01249b1a825c77bc6f5432a
+debugfs 1.47.0 (5-Feb-2023)
+
+EXIT_CODE=0

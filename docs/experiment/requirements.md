@@ -12,7 +12,7 @@
 | [0x04](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch4/) | M monitor启动多个U任务；ecall输出/sleep/任务/退出；非ecall异常CSR与恢复；CLINT公平时间片；优先级扩展单列 | 必做及优先级扩展实测/审查通过；推送暂停 |
 | [0x05](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch5/) | 新增Linux可识别实用设备；MMIO/注册/PLIC；按需后台/DMA/Acquire-Release；Rust/裸机/Linux验证 | 实测/审查通过；推送暂停 |
 | [0x06](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch6/) | OpenSBI/DTB/BusyBox；Ext4 VirtIO及个人Linux程序；Alpine rootfs/apk/原生GCC；其他发行版探索记录 | 实测通过，推送等待认证 |
-| [0x07](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch7/) | 整数RVV点积/GEMM；编译器向量化；模拟器与标量对照、边界/尾部测试 | 待执行 |
+| [0x07](https://heu-cs-dphd.github.io/projects/emu-exp-2026/ch7/) | 整数RVV点积/GEMM；编译器向量化；模拟器与标量对照、边界/尾部测试 | 实测通过，推送等待认证 |
 
 ## 资料与当前源码差异
 

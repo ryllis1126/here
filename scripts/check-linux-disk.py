@@ -8,6 +8,7 @@ import uuid
 ROOT = Path(__file__).resolve().parent.parent
 os.chdir(ROOT)
 session = importlib.import_module("linux-session")
+prefix = os.environ.get("HERE_LAB_CHAPTER", "ch6")
 image = importlib.import_module("lab-image").existing_image(
     os.environ.get("HERE_BUSYBOX_IMAGE", "busybox-lab.img"))
 marker = f"HERE_EXT4_{uuid.uuid4().hex}"
@@ -25,7 +26,7 @@ commands = (
     "umount /mnt; echo UMOUNT_STATUS=$?\n"
     "poweroff -f\n"
 )
-text = session.run(command, "ch6-linux-disk.txt", commands, host_timeout=240)
+text = session.run(command, f"{prefix}-linux-disk.txt", commands, host_timeout=240)
 for expected in ("MOUNT_STATUS=0", "APP_STATUS=0", "WRITE_STATUS=0", "UMOUNT_STATUS=0", "CALCULATOR READY",
                  "RESULT 42", "RESULT -5", "RESULT -56", "RESULT -3", "ERROR overflow",
                  "ERROR division by zero", "CALCULATOR BYE"):
@@ -33,8 +34,8 @@ for expected in ("MOUNT_STATUS=0", "APP_STATUS=0", "WRITE_STATUS=0", "UMOUNT_STA
 assert "/dev/vda /mnt ext4 rw" in text, text[-6000:]
 tools = importlib.import_module("check-debuggers")
 result = tools.capture(["debugfs", "-R", "cat /persistent.txt", image],
-                       "ch6-disk-persistence.txt", 15)
+                       f"{prefix}-disk-persistence.txt", 15)
 assert result.returncode == 0 and result.stdout.strip() == marker, result.stderr
-check = tools.capture(["e2fsck", "-fn", image], "ch6-e2fsck.txt", 30)
+check = tools.capture(["e2fsck", "-fn", image], f"{prefix}-e2fsck.txt", 30)
 assert check.returncode == 0, check.stdout + check.stderr
 print("Linux Ext4: calculator 6 cases, clean unmount, persistent bytes and e2fsck verified")

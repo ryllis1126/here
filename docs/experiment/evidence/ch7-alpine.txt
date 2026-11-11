@@ -1,0 +1,293 @@
+COMMAND: ['target/release/here', '.cache/images/linux-busybox-rv64gc.bin', '--dtb', 'dts/alpine-lab.dtb', '--device', 'virtio-block:/home/kazemiyuuka/projects/riscv/here/.cache/images/alpine-ch6-final.img', '--device', 'virtio-rng:/dev/urandom', '--max-cycles', '40000000000']
+HOST_TIMEOUT=600s
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+
+OpenSBI v1.5.1
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name             : virt-board,here
+Platform Features         : medeleg
+Platform HART Count       : 1
+Platform IPI Device       : aclint-mswi
+Platform Timer Device     : aclint-mtimer @ 10000000Hz
+Platform Console Device   : uart8250
+Platform HSM Device       : ---
+Platform PMU Device       : ---
+Platform Reboot Device    : ---
+Platform Shutdown Device  : syscon-poweroff
+Platform Suspend Device   : ---
+Platform CPPC Device      : ---
+Firmware Base             : 0x80000000
+Firmware Size             : 327 KB
+Firmware RW Offset        : 0x40000
+Firmware RW Size          : 71 KB
+Firmware Heap Offset      : 0x49000
+Firmware Heap Size        : 35 KB (total), 2 KB (reserved), 10 KB (used), 23 KB (free)
+Firmware Scratch Size     : 4096 B (total), 408 B (used), 3688 B (free)
+Runtime SBI Version       : 2.0
+
+Domain0 Name              : root
+Domain0 Boot HART         : 0
+Domain0 HARTs             : 0*
+Domain0 Region00          : 0x0000000000100000-0x0000000000100fff M: (I,R,W) S/U: (R,W)
+Domain0 Region01          : 0x0000000010000000-0x0000000010000fff M: (I,R,W) S/U: (R,W)
+Domain0 Region02          : 0x0000000002000000-0x000000000200ffff M: (I,R,W) S/U: ()
+Domain0 Region03          : 0x0000000080040000-0x000000008005ffff M: (R,W) S/U: ()
+Domain0 Region04          : 0x0000000080000000-0x000000008003ffff M: (R,X) S/U: ()
+Domain0 Region05          : 0x000000000c000000-0x000000000fffffff M: (I,R,W) S/U: (R,W)
+Domain0 Region06          : 0x0000000000000000-0xffffffffffffffff M: () S/U: (R,W,X)
+Domain0 Next Address      : 0x0000000080200000
+Domain0 Next Arg1         : 0x000000009f000000
+Domain0 Next Mode         : S-mode
+Domain0 SysReset          : yes
+Domain0 SysSuspend        : yes
+
+Boot HART ID              : 0
+Boot HART Domain          : root
+Boot HART Priv Version    : unknown
+Boot HART Base ISA        : rv64imafdc
+Boot HART ISA Extensions  : zicntr
+Boot HART PMP Count       : 0
+Boot HART PMP Granularity : 0 bits
+Boot HART PMP Address Bits: 0
+Boot HART MHPM Info       : 0 (0x00000000)
+Boot HART Debug Triggers  : 0 triggers
+Boot HART MIDELEG         : 0x0000000000000222
+Boot HART MEDELEG         : 0x000000000000b109
+[    0.000000] Booting Linux on hartid 0
+[    0.000000] Linux version 6.18.2 (jiangdu@LAPTOP-satori) (riscv64-linux-gnu-gcc (GCC) 15.1.0, GNU ld (GNU Binutils) 2.44) #45 SMP Wed Jul 22 12:25:27 CST 2026
+[    0.000000] Machine model: virt-board,here
+[    0.000000] SBI specification v2.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10005
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI DBCN extension detected
+[    0.000000] earlycon: sbi0 at I/O port 0x0 (options '')
+[    0.000000] printk: legacy bootconsole [sbi0] enabled
+[    0.000000] OF: reserved mem: 0x0000000080000000..0x000000008003ffff (256 KiB) nomap non-reusable mmode_resv1@80000000
+[    0.000000] OF: reserved mem: 0x0000000080040000..0x000000008005ffff (128 KiB) nomap non-reusable mmode_resv0@80040000
+[    0.000000] Zone ranges:
+[    0.000000]   DMA32    [mem 0x0000000080000000-0x000000009fffffff]
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000080000000-0x000000008005ffff]
+[    0.000000]   node   0: [mem 0x0000000080060000-0x000000009fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x000000009fffffff]
+[    0.000000] SBI HSM extension detected
+[    0.000000] Falling back to deprecated "riscv,isa"
+[    0.000000] riscv: base ISA extensions adfim
+[    0.000000] riscv: ELF capabilities adfim
+[    0.000000] Ticket spinlock: enabled
+[    0.000000] percpu: Embedded 30 pages/cpu s85848 r8192 d28840 u122880
+[    0.000000] Kernel command line: console=ttyS0 earlycon=sbi root=/dev/vda rw rootwait rdinit=/bin/sh
+[    0.000000] printk: log buffer data + meta data: 131072 + 458752 = 589824 bytes
+[    0.000000] Dentry cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 131072
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=1.
+[    0.000000] 	Tracing variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] RCU Tasks Trace: Setting shift to 0 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=1.
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 64 local interrupts mapped
+[    0.000000] riscv: providing IPIs using SBI IPI extension
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x24e6a1710, max_idle_ns: 440795202120 ns
+[    0.000000] sched_clock: 64 bits at 10MHz, resolution 100ns, wraps every 4398046511100ns
+[    0.001433] Console: colour dummy device 80x25
+[    0.001715] Calibrating delay loop (skipped), value calculated using timer frequency.. 20.00 BogoMIPS (lpj=40000)
+[    0.001984] pid_max: default: 32768 minimum: 301
+[    0.002662] LSM: initializing lsm=capability
+[    0.003609] Mount-cache hash table entries: 1024 (order: 1, 8192 bytes, linear)
+[    0.003840] Mountpoint-cache hash table entries: 1024 (order: 1, 8192 bytes, linear)
+[    0.017472] riscv: ELF compat mode unsupported
+[    0.017574] ASID allocator using 16 bits (65536 entries)
+[    0.018662] rcu: Hierarchical SRCU implementation.
+[    0.018790] rcu: 	Max phase no-delay instances is 1000.
+[    0.022502] smp: Bringing up secondary CPUs ...
+[    0.022668] smp: Brought up 1 node, 1 CPU
+[    0.023283] Memory: 467168K/524288K available (10456K kernel code, 5273K rwdata, 4096K rodata, 4950K init, 393K bss, 54564K reserved, 0K cma-reserved)
+[    0.025971] devtmpfs: initialized
+[    0.036812] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.037132] posixtimers hash table entries: 512 (order: 1, 8192 bytes, linear)
+[    0.037414] futex hash table entries: 256 (16384 bytes on 1 NUMA nodes, total 16 KiB, linear).
+[    0.038745] pinctrl core: initialized pinctrl subsystem
+[    0.049625] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.052083] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+[    0.052352] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.052684] audit: initializing netlink subsys (disabled)
+[    0.055564] thermal_sys: Registered thermal governor 'step_wise'
+[    0.055769] audit: type=2000 audit(0.052:1): state=initialized audit_enabled=0 res=1
+[    0.056140] cpuidle: using governor menu
+[    0.146624] cpu0: Ratio of byte access time to unaligned word access is 0.01, unaligned accesses are slow
+[    0.173209] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.173388] HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.191718] SCSI subsystem initialized
+[    0.192473] usbcore: registered new interface driver usbfs
+[    0.192883] usbcore: registered new interface driver hub
+[    0.193216] usbcore: registered new device driver usb
+[    0.196966] Advanced Linux Sound Architecture Driver Initialized.
+[    0.230566] clocksource: Switched to clocksource riscv_clocksource
+[    0.366336] NET: Registered PF_INET protocol family
+[    0.368051] IP idents hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.384780] tcp_listen_portaddr_hash hash table entries: 256 (order: 0, 4096 bytes, linear)
+[    0.385062] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.385292] TCP established hash table entries: 4096 (order: 3, 32768 bytes, linear)
+[    0.386188] TCP bind hash table entries: 4096 (order: 5, 131072 bytes, linear)
+[    0.387417] TCP: Hash tables configured (established 4096 bind 4096)
+[    0.387827] UDP hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.388198] UDP-Lite hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.389337] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.419891] RPC: Registered named UNIX socket transport module.
+[    0.420044] RPC: Registered udp transport module.
+[    0.420172] RPC: Registered tcp transport module.
+[    0.420313] RPC: Registered tcp-with-tls transport module.
+[    0.420467] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.442598] workingset: timestamp_bits=46 max_order=17 bucket_order=0
+[    0.457331] NFS: Registering the id_resolver key type
+[    0.457676] Key type id_resolver registered
+[    0.457804] Key type id_legacy registered
+[    0.458060] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[    0.458227] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver Registering...
+[    0.459520] 9p: Installing v9fs 9p2000 file system support
+[    0.461235] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+[    0.470144] io scheduler mq-deadline registered
+[    0.470297] io scheduler kyber registered
+[    0.470630] io scheduler bfq registered
+[    0.480844] riscv-plic: plic@c000000: mapped 53 interrupts with 1 handlers for 2 contexts.
+[    1.671820] Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+[    1.718796] printk: legacy console [ttyS0] disabled
+[    1.721382] 10000000.uart0: ttyS0 at MMIO 0x10000000 (irq = 12, base_baud = 230400) is a 16550A
+[    1.721715] printk: legacy console [ttyS0] enabled
+[    1.721715] printk: legacy console [ttyS0] enabled
+[    1.721996] printk: legacy bootconsole [sbi0] disabled
+[    1.721996] printk: legacy bootconsole [sbi0] disabled
+[    1.748761] random: crng init done
+[    1.842956] loop: module loaded
+[    1.843276] virtio_blk virtio0: 1/0/0 default/read/poll queues
+[    1.845132] virtio_blk virtio0: [vda] 1048576 512-byte logical blocks (537 MB/512 MiB)
+[    1.880204] usbcore: registered new interface driver uas
+[    1.880716] usbcore: registered new interface driver usb-storage
+[    1.892748] mousedev: PS/2 mouse device common for all mice
+[    1.905843] sdhci: Secure Digital Host Controller Interface driver
+[    1.906048] sdhci: Copyright(c) Pierre Ossman
+[    1.906393] Synopsys Designware Multimedia Card Interface Driver
+[    1.907788] sdhci-pltfm: SDHCI platform and OF driver helper
+[    1.913676] usbcore: registered new interface driver usbhid
+[    1.913868] usbhid: USB HID core driver
+[    1.915507] riscv-pmu-sbi: SBI PMU extension is available
+[    1.915827] riscv-pmu-sbi: 16 firmware and 2 hardware counters
+[    1.916032] riscv-pmu-sbi: Perf sampling/filtering is not supported as sscof extension is not available
+[    1.940800] NET: Registered PF_INET6 protocol family
+[    1.969702] Segment Routing with IPv6
+[    1.970073] In-situ OAM (IOAM) with IPv6
+[    1.970790] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    1.974592] NET: Registered PF_PACKET protocol family
+[    1.975257] 9pnet: Installing 9P2000 support
+[    1.975808] Key type dns_resolver registered
+[   17.848844] clk: Disabling unused clocks
+[   17.848998] PM: genpd: Disabling unused power domains
+[   17.849203] ALSA device list:
+[   17.849331]   No soundcards found.
+[   17.875840] Freeing unused kernel image (initmem) memory: 4948K
+[   17.876825] Run /bin/sh as init process
+/bin/sh: can't access tty; job control turned off
+~ # mount -t proc proc /proc
+~ # mount -t sysfs sysfs /sys
+~ # mdev -s
+~ # mkdir -p /newroot
+~ # mount -t ext4 /dev/vda /newroot
+[   19.996364] EXT4-fs (vda): recovery complete
+[   19.999475] EXT4-fs (vda): mounted filesystem 16e9868c-338f-4b74-97ee-95f31ac87f5a r/w with ordered data mode. Quota mode: disabled.
+~ # umount /proc
+~ # umount /sys
+~ # exec /sbin/switch_root /newroot /sbin/init
+HERE_ALPINE_ROOT_READY
+export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+cat /etc/alpine-release
+cat /proc/mounts
+readlink /proc/1/exe
+apk --no-network add /opt/apks/*.apk; echo APK_STATUS=$?
+apk info -e gcc make musl-dev; echo PACKAGES_STATUS=$?
+gcc --version
+make --version
+printf '%s\n' '#include <stdio.h>' 'int main(void) { int sum=0; for(int i=1;i<=6;i++)sum+=i; printf("ALPINE GCC PASS: %d\n",sum*2); return sum!=21; }' > /root/native.c
+gcc -O2 -march=rv64gc -mabi=lp64d /root/native.c -o /root/native; echo GCC_STATUS=$?
+/root/native; echo NATIVE_STATUS=$?
+sync
+poweroff -f
+~ # export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+~ # cat /etc/alpine-release
+3.24.4
+~ # cat /proc/mounts
+/dev/vda / ext4 rw,relatime 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+devtmpfs /dev devtmpfs rw,relatime,size=234860k,nr_inodes=58715,mode=755 0 0
+devpts /dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+~ # readlink /proc/1/exe
+/bin/busybox
+~ # apk --no-network add /opt/apks/*.apk; echo APK_STATUS=$?
+WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/APKINDEX.tar.gz: No such file or directory
+WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.24/community/riscv64/APKINDEX.tar.gz: No such file or directory
+OK: 242.6 MiB in 31 packages
+APK_STATUS=0
+~ # apk info -e gcc make musl-dev; echo PACKAGES_STATUS=$?
+gcc
+make
+musl-dev
+PACKAGES_STATUS=0
+~ # gcc --version
+gcc (Alpine 15.2.0) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+~ # make --version
+GNU Make 4.4.1
+Built for riscv64-alpine-linux-musl
+Copyright (C) 1988-2023 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+~ # printf '%s\n' '#include <stdio.h>' 'int main(void) { int sum=0; for(int i=1;
+
+i<=6;i++)sum+=i; printf("ALPINE GCC PASS: %d\n",sum*2); return sum!=21; }' > /ro
+
+ot/native.c
+~ # gcc -O2 -march=rv64gc -mabi=lp64d /root/native.c -o /root/native; echo GCC_S
+
+TATUS=$?
+GCC_STATUS=0
+~ # /root/native; echo NATIVE_STATUS=$?
+ALPINE GCC PASS: 42
+NATIVE_STATUS=0
+~ # sync
+~ # poweroff -f
+[   28.647564] reboot: Power down
+Used time: 45.260811s
+
+STATUS=EXITED
+EXIT_CODE=0

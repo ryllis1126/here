@@ -1,0 +1,17 @@
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.11s
+     Running unittests src/lib.rs (target/debug/build/here/80c9898b78e8c199/out/here-80c9898b78e8c199)
+
+running 1 test
+test isa::riscv::instruction::exec_vector_function::test::vector_config_register_avl_modes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 319 filtered out; finished in 0.00s

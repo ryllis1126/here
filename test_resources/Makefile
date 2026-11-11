@@ -74,6 +74,23 @@ $(BIN)/%.elf: $(OBJ)/%.o $(LIBS_OBJ) linker.ld
 	@ $(call echo_cmd, $(RV_LD_PROMPT), $@)
 	$(Q) mkdir -p $(OBJ) $(BIN)
 	$(Q) $(RV_LD) $(RV_LDFLAG) -T linker.ld -o $@ $(filter %.o,$^)
+
+RV_CLANG ?= clang
+
+$(BIN)/lab_rvv.elf: $(OBJ)/lab_rvv.o $(OBJ)/lab_rvv_kernels.o $(OBJ)/lab_rvv_auto.o $(LIBS_OBJ) linker.ld
+	@ $(call echo_cmd, $(RV_LD_PROMPT), $@)
+	$(Q) mkdir -p $(BIN)
+	$(Q) $(RV_LD) $(RV_LDFLAG) -T linker.ld -o $@ $(filter %.o,$^)
+
+$(OBJ)/lab_rvv_kernels.o: $(SRC)/lab_rvv_kernels.S
+	@ $(call echo_cmd, $(RV_CC_PROMPT), $@)
+	$(Q) mkdir -p $(OBJ)
+	$(Q) $(RV_CC) $(RV_CFLAG) -c $< -o $@
+
+$(OBJ)/lab_rvv_auto.o: $(SRC)/lab_rvv_auto.c
+	@ $(call echo_cmd, $(RV_CLANG), $@)
+	$(Q) mkdir -p $(OBJ)
+	$(Q) $(RV_CLANG) --target=riscv64-unknown-elf $(RV_CFLAG) -O3 -Rpass=loop-vectorize -c $< -o $@
 	
 # default .c file
 $(OBJ)/%.o: $(SRC)/%.c

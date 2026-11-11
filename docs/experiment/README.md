@@ -2,6 +2,7 @@
 
 课程：[RISC-V Emulator 实验指导（2026）](https://heu-cs-dphd.github.io/projects/emu-exp-2026/)。基础 HEAD：`7cd34e277692c5fe6c5a9959b3206e0cff0808ff`。本目录记录个人实现与实际运行，官方已有功能不自动算作完成。
 
+- [最终交付与发布状态](delivery.md)
 - [课程验收映射](requirements.md)
 - [实施计划](plan.md)
 - [持续进度](progress.md)
@@ -15,6 +16,7 @@
 - [Chapter 0x04](ch4.md)
 - [Chapter 0x05](ch5.md)
 - [Chapter 0x06](ch6.md)
+- [Chapter 0x07](ch7.md)
 
 统一入口（项目根目录）：
 
@@ -24,6 +26,7 @@ bash scripts/lab.sh build
 bash scripts/lab.sh isa
 bash scripts/lab.sh test
 bash scripts/lab.sh run test_resources/bin/main.elf
+bash scripts/lab.sh rvv
 ```
 
 原始日志 `.cache/lab/`；验收关键证据 `evidence/`。超时、失败、未运行如实记录。0x00.1 和 0x00.2 均验收后才创建 ch0，此后依次 ch1…ch7。

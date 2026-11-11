@@ -87,6 +87,11 @@ case "${1:-help}" in
         bash scripts/setup-linux.sh alpine
         lab_log linux-prepare python3 scripts/prepare-linux.py "$@"
         ;;
-    help) printf 'usage: bash scripts/lab.sh {env|build|isa|test|run ELF|gdb|dtc|linux-prepare} [args]\n' ;;
+    rvv)
+        shift
+        lab_log rvv-build make -C test_resources -j "$LAB_JOBS" bin/lab_rvv.elf bin/vector_kernels.elf "$@"
+        lab_log rvv-check python3 scripts/check-rvv.py
+        ;;
+    help) printf 'usage: bash scripts/lab.sh {env|build|isa|test|run ELF|gdb|dtc|linux-prepare|rvv} [args]\n' ;;
     *) printf 'unknown lab command: %s\n' "$1" >&2; exit 2 ;;
 esac

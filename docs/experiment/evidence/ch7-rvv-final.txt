@@ -1,0 +1,24 @@
+LOG=.cache/lab/rvv-build-20261111T001905-3.log
+COMMAND: make -C test_resources -j 4 bin/lab_rvv.elf bin/vector_kernels.elf -B
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/lab_rvv.o[0m
+[1;34mRV_CC      obj/lab_rvv_kernels.o[0m
+[1;34mclang      obj/lab_rvv_auto.o[0m
+[1;34mRV_CC      obj/io.o[0m
+[1;34mRV_CC      obj/log.o[0m
+[1;34mRV_CC      obj/boot.o[0m
+[1;34mRV_CC      obj/trap.o[0m
+[1;34mRV_CC      obj/trap_handler.o[0m
+[1;34mRV_CC      obj/power.o[0m
+[1;34mRV_CC      obj/vector_kernels.o[0m
+[1;34mRV_LD      bin/vector_kernels.elf[0m
+src/lab_rvv_auto.c:6:5: remark: vectorized loop (vectorization width: vscale x 4, interleaved count: 1) [-Rpass=loop-vectorize]
+    6 |     for (size_t i = 0; i < n; ++i)
+      |     ^
+[1;34mRV_LD      bin/lab_rvv.elf[0m
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+EXIT_CODE=0
+LOG=.cache/lab/rvv-check-20261111T001905-3.log
+COMMAND: python3 scripts/check-rvv.py
+Integer RVV verified: dot and compiler AXPY at 14 lengths, GEMM at 7 shapes, and original vector kernels
+EXIT_CODE=0

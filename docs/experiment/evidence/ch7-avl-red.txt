@@ -1,0 +1,33 @@
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.02s
+     Running unittests src/lib.rs (target/debug/build/here/80c9898b78e8c199/out/here-80c9898b78e8c199)
+
+running 1 test
+test isa::riscv::instruction::exec_vector_function::test::vector_config_register_avl_modes ... FAILED
+
+failures:
+
+---- isa::riscv::instruction::exec_vector_function::test::vector_config_register_avl_modes stdout ----
+
+thread 'isa::riscv::instruction::exec_vector_function::test::vector_config_register_avl_modes' (298) panicked at src/isa/riscv/instruction/exec_vector_function.rs:1664:13:
+assertion `left == right` failed: x0 AVL requests VLMAX
+  left: 0
+ right: 4
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    isa::riscv::instruction::exec_vector_function::test::vector_config_register_avl_modes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 319 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

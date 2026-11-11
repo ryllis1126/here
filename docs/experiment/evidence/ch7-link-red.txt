@@ -1,0 +1,10 @@
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/lab_rvv.o[0m
+[1;34mRV_LD      bin/lab_rvv.elf[0m
+riscv64-unknown-elf-ld: obj/lab_rvv.o: in function `check_vectors':
+/home/kazemiyuuka/projects/riscv/here/test_resources/src/lab_rvv.c:40:(.text+0x24c): undefined reference to `lab_dot'
+riscv64-unknown-elf-ld: /home/kazemiyuuka/projects/riscv/here/test_resources/src/lab_rvv.c:45:(.text+0x2ec): undefined reference to `lab_axpy'
+riscv64-unknown-elf-ld: obj/lab_rvv.o: in function `check_matrices':
+/home/kazemiyuuka/projects/riscv/here/test_resources/src/lab_rvv.c:72:(.text+0x5d4): undefined reference to `lab_gemm'
+make: *** [Makefile:76: bin/lab_rvv.elf] Error 1
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'

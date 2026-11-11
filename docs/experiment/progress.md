@@ -1,6 +1,6 @@
 # 持续执行进度
 
-当前：Chapter 6 已通过本地验收。Chapter 7 正在进行整数 RVV 回归和审查。WSL GitHub HTTPS 认证仍待恢复。
+当前：Chapter 0x00.1 至 0x07 已通过本地验收。个人 origin 的 HTTPS 推送等待 WSL GitHub 凭据。
 
 基础HEAD：7cd34e277692c5fe6c5a9959b3206e0cff0808ff。2026-11-10开始时master干净、origin/upstream同步，upstream push禁用。
 
@@ -33,10 +33,13 @@
 | 0x03补充验收 | fa18065 | ch3-fix1 | 339/344项及20次C运行通过；WSL认证待恢复 |
 | 0x04 | edbeb24 | ch4 | 必做和优先级扩展通过；WSL认证待恢复 |
 | 0x05 | dc36f42 | ch5 | VirtIO RNG 实测通过，WSL 认证待恢复 |
-| 0x06 | 见 ch6^{commit} | ch6 | BusyBox 与 Alpine 实测通过，WSL 认证待恢复 |
+| 0x06 | d722353 | ch6 | BusyBox 与 Alpine 实测通过，WSL 认证待恢复 |
+| 0x07 | 见 ch7^{commit} | ch7 | 整数 RVV 与完整回归通过，WSL 认证待恢复 |
 
 首次推送命令：git push --atomic origin refs/heads/master:refs/heads/master refs/tags/ch0:refs/tags/ch0，退出128：could not read Username for https://github.com。已通知用户在WSL配置身份认证，未请求在聊天发送凭据。认证恢复前继续本地实验，不重试推送。
 
 - Task 8本地验收通过：全新VirtIO-RNG，6项公开MMIO测试、真实裸机2次DMA/IRQ、Linux原生virtio_rng.0和/dev/hwrng读取32字节，345/350项及前章回归全部通过；独立审查无Critical/Important问题，补充分散描述符链测试。ch5由Tag定位，下一章补实际SHA。
 
 - Chapter 6 本地验收通过。BusyBox 计算器和 Ext4 持久化、Alpine 切根、APK 安装及原生 GCC 运行均有串口证据。修复 VirtIO Block 4 MiB 短读，默认 346 项与自定义指令 351 项回归通过。
+
+- Chapter 7 本地验收通过。RVV 点积和 Clang AXPY 分别检查 14 个长度，GEMM 检查 7 个形状。AVL x0 回归先失败后通过，最终默认 347 项和自定义指令 352 项均通过。

@@ -1,0 +1,7 @@
+host calculator: 16 cases passed with UBSan
+startup: warm-restart .bss clearing and .data preservation passed
+HERE UART calculator: 16 cases and graceful exit passed
+custom backend: 1056 C reference comparisons passed; 528 executions per instruction verified
+monitor: U/M traps, CSR recovery, context, timer fairness, priority, sleep/spawn/exit passed
+VirtIO-RNG: two fresh DMA buffers, two PLIC IRQs and reset verified
+Linux: native virtio_rng.0, /dev/hwrng and actual 32-byte read verified

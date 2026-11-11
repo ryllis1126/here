@@ -1,0 +1,31 @@
+COMMAND: ['/opt/riscv/bin/riscv64-unknown-elf-objdump', '-d', '--disassemble=lab_dot', 'test_resources/bin/lab_rvv.elf']
+
+test_resources/bin/lab_rvv.elf:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+000000008000180c <lab_dot>:
+    8000180c:	0d0072d7          	vsetvli	t0,zero,e32,m1,ta,ma
+    80001810:	5e003457          	vmv.v.i	v8,0
+    80001814:	02060463          	beqz	a2,8000183c <lab_dot+0x30>
+    80001818:	09067357          	vsetvli	t1,a2,e32,m1,tu,ma
+    8000181c:	02056487          	vle32.v	v9,(a0)
+    80001820:	0205e507          	vle32.v	v10,(a1)
+    80001824:	b6a4a457          	vmacc.vv	v8,v9,v10
+    80001828:	00231393          	slli	t2,t1,0x2
+    8000182c:	00750533          	add	a0,a0,t2
+    80001830:	007585b3          	add	a1,a1,t2
+    80001834:	40660633          	sub	a2,a2,t1
+    80001838:	fe0610e3          	bnez	a2,80001818 <lab_dot+0xc>
+    8000183c:	0d0072d7          	vsetvli	t0,zero,e32,m1,ta,ma
+    80001840:	0012d313          	srli	t1,t0,0x1
+    80001844:	00030a63          	beqz	t1,80001858 <lab_dot+0x4c>
+    80001848:	3e8345d7          	vslidedown.vx	v11,v8,t1
+    8000184c:	02858457          	vadd.vv	v8,v8,v11
+    80001850:	00135313          	srli	t1,t1,0x1
+    80001854:	fe031ae3          	bnez	t1,80001848 <lab_dot+0x3c>
+    80001858:	42802557          	vmv.x.s	a0,v8
+    8000185c:	00008067          	ret
+
+EXIT_CODE=0

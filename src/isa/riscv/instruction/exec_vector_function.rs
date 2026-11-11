@@ -38,7 +38,15 @@ pub(super) struct VectorConfigField {
 }
 
 pub(super) trait VectorConfigFieldExtractor {
-    fn exec(imm: WordType, rs1: u8, cpu: &mut RVCPU) -> VectorConfigField;
+    fn exec(imm: WordType, rs1: u8, rd: u8, cpu: &mut RVCPU) -> VectorConfigField;
+}
+
+fn register_avl(rs1: u8, rd: u8, cpu: &mut RVCPU) -> WordType {
+    match (rs1, rd) {
+        (0, 0) => cpu.csr.get_by_type::<Vl>().unwrap().get_vl(),
+        (0, _) => WordType::MAX,
+        _ => cpu.read_reg(rs1),
+    }
 }
 
 pub(super) fn exec_vector_config<T>(info: RVInstrInfo, cpu: &mut RVCPU) -> Result<(), Exception>
@@ -56,7 +64,7 @@ where
         } = info
         {
             let imm = (func6 as WordType) << 6 | (vm as WordType) << 5 | (rs2 as WordType);
-            let configfield = T::exec(imm, rs1, cpu);
+            let configfield = T::exec(imm, rs1, vd, cpu);
 
             if let Some(maxvl) = vtype_csr.vsetvl(configfield.vtype) {
                 let vl = configfield.input_len.min(maxvl);
@@ -85,7 +93,7 @@ where
 
 pub(super) struct VsetivliFieldExtractor {}
 impl VectorConfigFieldExtractor for VsetivliFieldExtractor {
-    fn exec(imm: WordType, rs1: u8, _cpu: &mut RVCPU) -> VectorConfigField {
+    fn exec(imm: WordType, rs1: u8, _rd: u8, _cpu: &mut RVCPU) -> VectorConfigField {
         debug_assert!((imm & 0b1100_0000_0000) == 0b1100_0000_0000);
         let vtype = imm & !0b1100_0000_0000;
         let input_len = rs1 as WordType;
@@ -95,17 +103,17 @@ impl VectorConfigFieldExtractor for VsetivliFieldExtractor {
 
 pub(super) struct VsetvliFieldExtractor {}
 impl VectorConfigFieldExtractor for VsetvliFieldExtractor {
-    fn exec(imm: WordType, rs1: u8, cpu: &mut RVCPU) -> VectorConfigField {
+    fn exec(imm: WordType, rs1: u8, rd: u8, cpu: &mut RVCPU) -> VectorConfigField {
         debug_assert!((imm & 0b1000_0000_0000) == 0b0000_0000_0000);
         let vtype = imm & !0b1000_0000_0000;
-        let input_len = cpu.read_reg(rs1);
+        let input_len = register_avl(rs1, rd, cpu);
         VectorConfigField { vtype, input_len }
     }
 }
 
 pub(super) struct VsetvlFieldExtractor {}
 impl VectorConfigFieldExtractor for VsetvlFieldExtractor {
-    fn exec(imm: WordType, rs1: u8, cpu: &mut RVCPU) -> VectorConfigField {
+    fn exec(imm: WordType, rs1: u8, rd: u8, cpu: &mut RVCPU) -> VectorConfigField {
         debug_assert!(
             (imm & 0b1111_1110_0000) == 0b1000_0000_0000,
             "imm = {:b}",
@@ -113,7 +121,7 @@ impl VectorConfigFieldExtractor for VsetvlFieldExtractor {
         );
         let rs2 = (imm as u8) & 0b11111;
         let vtype = cpu.read_reg(rs2);
-        let input_len = cpu.read_reg(rs1);
+        let input_len = register_avl(rs1, rd, cpu);
         VectorConfigField { vtype, input_len }
     }
 }
@@ -1646,6 +1654,53 @@ mod test {
 
         assert_eq!(err, Exception::IllegalInstruction);
         assert_eq!(cpu.pc, 0x2000);
+    }
+
+    #[test]
+    fn vector_config_register_avl_modes() {
+        let e32_m1 = (Vsew::E32 as u8) << 3;
+        let vlmax = (VLEN_BYTE / 4) as WordType;
+        for register_vtype in [false, true] {
+            let mut cpu = TestCPUBuilder::new()
+                .reg(1, 2)
+                .reg(2, 0)
+                .reg(6, e32_m1 as WordType)
+                .build();
+            let instruction = if register_vtype {
+                RiscvInstr::VSETVL
+            } else {
+                RiscvInstr::VSETVLI
+            };
+            let configure = |cpu: &mut RVCPU, rs1, rd| {
+                let (func6, rs2) = if register_vtype {
+                    (0b100000, 6)
+                } else {
+                    (0, e32_m1)
+                };
+                cpu.execute(
+                    instruction,
+                    RVInstrInfo::V {
+                        rs1,
+                        rs2,
+                        rd,
+                        vm: false,
+                        func6,
+                    },
+                )
+                .unwrap();
+            };
+            configure(&mut cpu, 0, 5);
+            assert_eq!(cpu.read_reg(5), vlmax, "x0 AVL requests VLMAX");
+            configure(&mut cpu, 1, 5);
+            configure(&mut cpu, 0, 0);
+            assert_eq!(cpu.csr.get_by_type::<Vl>().unwrap().get_vl(), 2);
+            configure(&mut cpu, 2, 5);
+            assert_eq!(
+                cpu.read_reg(5),
+                0,
+                "zero in a nonzero register requests VL=0"
+            );
+        }
     }
 
     #[test]

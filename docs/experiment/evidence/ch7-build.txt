@@ -1,0 +1,8 @@
+make: Entering directory '/home/kazemiyuuka/projects/riscv/here/test_resources'
+[1;34mRV_CC      obj/lab_rvv_kernels.o[0m
+[1;34mclang      obj/lab_rvv_auto.o[0m
+src/lab_rvv_auto.c:6:5: remark: vectorized loop (vectorization width: vscale x 4, interleaved count: 1) [-Rpass=loop-vectorize]
+    6 |     for (size_t i = 0; i < n; ++i)
+      |     ^
+[1;34mRV_LD      bin/lab_rvv.elf[0m
+make: Leaving directory '/home/kazemiyuuka/projects/riscv/here/test_resources'

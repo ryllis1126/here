@@ -1,0 +1,23 @@
+COMMAND: ['target/release/here', 'test_resources/bin/lab_rvv.elf', '--isa', 'RV64GCV', '--max-cycles', '5000000']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+RVV DOT PASS: 14 lengths
+
+RVV COMPILER AXPY PASS: 14 lengths
+
+RVV GEMM PASS: 7 shapes
+
+LAB RVV PASS
+
+[32mPASS[0m
+
+
+Used time: 0.002772s
+
+EXIT_CODE=0

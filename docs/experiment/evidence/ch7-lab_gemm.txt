@@ -1,0 +1,39 @@
+COMMAND: ['/opt/riscv/bin/riscv64-unknown-elf-objdump', '-d', '--disassemble=lab_gemm', 'test_resources/bin/lab_rvv.elf']
+
+test_resources/bin/lab_rvv.elf:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000080001860 <lab_gemm>:
+    80001860:	06068863          	beqz	a3,800018d0 <lab_gemm+0x70>
+    80001864:	06070663          	beqz	a4,800018d0 <lab_gemm+0x70>
+    80001868:	00271f13          	slli	t5,a4,0x2
+    8000186c:	00060813          	mv	a6,a2
+    80001870:	00070313          	mv	t1,a4
+    80001874:	0d0372d7          	vsetvli	t0,t1,e32,m1,ta,ma
+    80001878:	5e003457          	vmv.v.i	v8,0
+    8000187c:	00080393          	mv	t2,a6
+    80001880:	00058e13          	mv	t3,a1
+    80001884:	00078e93          	mv	t4,a5
+    80001888:	020e8063          	beqz	t4,800018a8 <lab_gemm+0x48>
+    8000188c:	000e2f83          	lw	t6,0(t3)
+    80001890:	0203e487          	vle32.v	v9,(t2)
+    80001894:	b69fe457          	vmacc.vx	v8,t6,v9
+    80001898:	004e0e13          	addi	t3,t3,4
+    8000189c:	01e383b3          	add	t2,t2,t5
+    800018a0:	fffe8e93          	addi	t4,t4,-1
+    800018a4:	fe0e94e3          	bnez	t4,8000188c <lab_gemm+0x2c>
+    800018a8:	02056427          	vse32.v	v8,(a0)
+    800018ac:	00229f93          	slli	t6,t0,0x2
+    800018b0:	01f50533          	add	a0,a0,t6
+    800018b4:	01f80833          	add	a6,a6,t6
+    800018b8:	40530333          	sub	t1,t1,t0
+    800018bc:	fa031ce3          	bnez	t1,80001874 <lab_gemm+0x14>
+    800018c0:	00279f93          	slli	t6,a5,0x2
+    800018c4:	01f585b3          	add	a1,a1,t6
+    800018c8:	fff68693          	addi	a3,a3,-1
+    800018cc:	fa0690e3          	bnez	a3,8000186c <lab_gemm+0xc>
+    800018d0:	00008067          	ret
+
+EXIT_CODE=0

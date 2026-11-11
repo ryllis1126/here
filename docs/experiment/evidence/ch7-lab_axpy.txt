@@ -1,0 +1,25 @@
+COMMAND: ['/opt/riscv/bin/riscv64-unknown-elf-objdump', '-d', '--disassemble=lab_axpy', 'test_resources/bin/lab_rvv.elf']
+
+test_resources/bin/lab_rvv.elf:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+00000000800018d4 <lab_axpy>:
+    800018d4:	02070c63          	beqz	a4,8000190c <lab_axpy+0x38>
+    800018d8:	00000793          	li	a5,0
+    800018dc:	0d177857          	vsetvli	a6,a4,e32,m2,ta,ma
+    800018e0:	00279893          	slli	a7,a5,0x2
+    800018e4:	011582b3          	add	t0,a1,a7
+    800018e8:	0202e407          	vle32.v	v8,(t0)
+    800018ec:	011602b3          	add	t0,a2,a7
+    800018f0:	0202e507          	vle32.v	v10,(t0)
+    800018f4:	011508b3          	add	a7,a0,a7
+    800018f8:	41070733          	sub	a4,a4,a6
+    800018fc:	b686e557          	vmacc.vx	v10,a3,v8
+    80001900:	0208e527          	vse32.v	v10,(a7)
+    80001904:	010787b3          	add	a5,a5,a6
+    80001908:	fc071ae3          	bnez	a4,800018dc <lab_axpy+0x8>
+    8000190c:	00008067          	ret
+
+EXIT_CODE=0

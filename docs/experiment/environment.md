@@ -20,3 +20,7 @@
 ## Chapter 5 Linux工具
 
 使用相同nightly和交叉工具链。`scripts/setup-linux.sh`在项目缓存保存校验过SHA256的官方OpenSBI v1.5.1/Linux BusyBox固件和Ubuntu dtc1.7.0包；仅dpkg-deb解包，没有安装系统包。`bash scripts/lab.sh dtc`实际编译DTB通过。WSL中`gh auth status`沙箱内外均仍显示未登录，所有推送继续暂停。
+
+## Linux 和 RVV 扩展实验
+
+第 6、7 章使用本机 Clang 22.1.7 和 LLD、Python 3.14.7、e2fsprogs 1.47.0。Linux 固件为 OpenSBI 1.5.1 与 Linux 6.18.2，Alpine 3.24.4 的来宾 GCC 为 15.2.0。固件、发行版及 APK 的校验值由项目脚本管理。通过 bash scripts/lab.sh rvv 构建并验证 Clang 自动向量化目标。

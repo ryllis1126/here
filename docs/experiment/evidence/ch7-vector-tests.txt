@@ -1,0 +1,116 @@
+LOG=.cache/lab/cargo-test-20261111T001157-3677.log
+COMMAND: timeout --kill-after=5 300 cargo test --locked --features riscv-tests -j 4 vector_op
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+warning: `here` (lib test) generated 1 warning (1 duplicate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/build/here/80c9898b78e8c199/out/here-80c9898b78e8c199)
+
+running 66 tests
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_asub_keeps_extra_precision_before_rounding ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_asubu_keeps_negative_difference_before_rounding ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_aaddu_obeys_rounding_mode ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_nclip_wx_saturates_signed ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_nclipu_fractional_lmul_overlap_check ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_nclipu_wv_saturates ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_sadd_vx_saturates_signed_min ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_saddu_vv_saturates ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_smul_rounds_and_saturates ... ok
+test isa::riscv::vector::arithmetic::fix_point_impl::test::test_vector_op_ssrl_vi_rounds ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_adc_sbc_vvm ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_adc_vvm_honors_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_add_vv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_add_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_bit_vv_honors_mask_tail_and_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_cpop_and_first_m_honor_mask ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_compress_vm_rejects_overlap_and_nonzero_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_compress_vm ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_compress_vm_tail_agnostic ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_bit_vv_binary ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_first_m_returns_minus_one_when_no_match ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_id_v_honors_mask ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_iota_m_honors_mask ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_before_first_family ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_madc_msbc_mask_vvm ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_before_first_initializes_seen_first_from_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_scalar_forms_reject_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_special_rejects_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vv_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_vv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_rejects_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_vv_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_merge_vim_uses_signed_immediate_value ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_right_wi_signed ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mask_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_multiply_add ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_merge_vxm_selects_scalar_by_v0 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_merge_vvm_selects_by_v0 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_iota_m_counts_source_bits_before_vstart ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_multiply_add_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_right_wv ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_move_v_uses_u64_width ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_vi ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgatherei16_vv_rejects_widened_index_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgatherei16_vv_uses_16_bit_indices ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgatherei16_vv_uses_widened_index_group_for_e8 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1down_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_vv_binary ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1up_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slidedown_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_right_wx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_rgather_rejects_destination_source_overlap ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1up_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_integer_vx_binary ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slidedown_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slideup_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slideup_vx ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_widening_add_sub ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_zext_vf2 ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_widening_multiply_add ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_slide1down_honors_mask_and_tail ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_widening_mul ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_narrowing_shift_fractional_lmul_overlap_check ... ok
+test isa::riscv::vector::arithmetic::integer_impl::test::test_vector_op_mul_div_e64 ... ok
+
+test result: ok. 66 passed; 0 failed; 0 ignored; 0 measured; 254 filtered out; finished in 0.01s
+
+     Running unittests src/main.rs (target/debug/build/here/273c6decfacd7a7b/out/here-273c6decfacd7a7b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.00s
+
+     Running tests/cli_nonterminal.rs (target/debug/build/here/0f8ee6df87f9cc38/out/cli_nonterminal-0f8ee6df87f9cc38)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/riscv_tests.rs (target/debug/build/here/8254641ab0a284d8/out/riscv_tests-8254641ab0a284d8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+
+     Running tests/virtio_block_io.rs (target/debug/build/here/fc722dbe4dc63843/out/virtio_block_io-fc722dbe4dc63843)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+     Running tests/virtio_rng.rs (target/debug/build/here/1509e616532d9d21/out/virtio_rng-1509e616532d9d21)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+EXIT_CODE=0

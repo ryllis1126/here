@@ -1,0 +1,17 @@
+COMMAND: ['target/release/here', 'test_resources/bin/lab_rng.elf', '--device', 'virtio-rng:/dev/urandom', '--max-cycles', '50000000']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+RNG IRQ DMA PASS: requests=2 bytes=128 irq=2
+
+[32mPASS[0m
+
+
+Used time: 0.000790s
+
+EXIT_CODE=0
