@@ -82,6 +82,11 @@ case "${1:-help}" in
         export LD_LIBRARY_PATH="$LAB_ROOT/.cache/tools/dtc/usr/lib/x86_64-linux-gnu:$LAB_ROOT/.cache/tools/dtc/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
         exec .cache/tools/dtc/usr/bin/dtc "$@"
         ;;
-    help) printf 'usage: bash scripts/lab.sh {env|build|isa|test|run ELF|gdb|dtc} [args]\n' ;;
+    linux-prepare)
+        shift
+        bash scripts/setup-linux.sh alpine
+        lab_log linux-prepare python3 scripts/prepare-linux.py "$@"
+        ;;
+    help) printf 'usage: bash scripts/lab.sh {env|build|isa|test|run ELF|gdb|dtc|linux-prepare} [args]\n' ;;
     *) printf 'unknown lab command: %s\n' "$1" >&2; exit 2 ;;
 esac

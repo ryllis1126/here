@@ -14,6 +14,7 @@
 - [Chapter 0x03](ch3.md)
 - [Chapter 0x04](ch4.md)
 - [Chapter 0x05](ch5.md)
+- [Chapter 0x06](ch6.md)
 
 统一入口（项目根目录）：
 

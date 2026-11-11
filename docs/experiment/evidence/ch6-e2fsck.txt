@@ -1,0 +1,10 @@
+COMMAND: ['e2fsck', '-fn', '/home/kazemiyuuka/projects/riscv/here/.cache/images/busybox-ch6-final.img']
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+HERE-LAB: 13/10240 files (7.7% non-contiguous), 1728/10240 blocks
+e2fsck 1.47.0 (5-Feb-2023)
+
+EXIT_CODE=0

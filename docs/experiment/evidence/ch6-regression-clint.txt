@@ -1,0 +1,21 @@
+COMMAND: ['target/release/here', 'test_resources/bin/clint.elf', '--max-cycles', '1000000']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+========== START src/clint.c ==========
+
+[32m[DEBUG] waiting for timer interrupt...[0m
+
+[34m[INFO] Machine timer interrupt![0m
+
+[32mPASS[0m
+
+
+Used time: 0.000926s
+
+EXIT_CODE=0

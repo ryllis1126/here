@@ -23,3 +23,9 @@ fetch .cache/tools/libfdt1.deb 274d20dfab9d6b216b5de85446a93f6ce5b2cd82c847b8dfd
 dpkg-deb --extract .cache/tools/device-tree-compiler.deb .cache/tools/dtc
 dpkg-deb --extract .cache/tools/libfdt1.deb .cache/tools/dtc
 bash scripts/lab.sh dtc --version
+if [[ ${1:-base} == alpine ]]; then
+    while IFS=$'\t' read -r file digest url; do
+        mkdir -p "$(dirname -- "$file")"
+        fetch "$file" "$digest" "$url"
+    done < <(python3 -c 'import json; print("\n".join("\t".join((x["path"], x["sha256"], x["url"])) for x in json.load(open("scripts/linux-assets.json"))))')
+fi

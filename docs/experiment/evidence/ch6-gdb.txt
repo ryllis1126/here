@@ -1,0 +1,29 @@
+COMMAND: ['bash', 'scripts/lab.sh', 'gdb', '-q', '-nx', '-batch', 'test_resources/bin/main.elf', '-ex', 'set pagination off', '-ex', 'set confirm off', '-ex', 'set tcp connect-timeout 5', '-ex', 'target remote 127.0.0.1:1234', '-ex', 'printf "INITIAL_PC=%#lx\\n", $pc', '-ex', 'info registers pc sp a0', '-ex', 'x/4wx 0x80000000', '-ex', 'x/4i $pc', '-ex', 'stepi', '-ex', 'printf "STEP_PC=%#lx\\n", $pc', '-ex', 'break *main', '-ex', 'stepi 40000', '-ex', 'printf "AT_MAIN=%d\\n", $pc == (long)&main', '-ex', 'info registers pc sp', '-ex', 'x/4i $pc', '-ex', 'delete breakpoints', '-ex', 'detach']
+starttext () at src/boot.S:5
+5	    la sp, stack_top        # 设置栈指针
+INITIAL_PC=0x80000000
+pc             0x80000000	0x80000000 <starttext>
+sp             0x0	0x0
+a0             0x0	0
+0x80000000 <starttext>:	0x0001a117	0x00010113	0x00005517	0xff850513
+=> 0x80000000 <starttext>:	auipc	sp,0x1a
+   0x80000004 <starttext+4>:	mv	sp,sp
+   0x80000008 <starttext+8>:	auipc	a0,0x5
+   0x8000000c <starttext+12>:	addi	a0,a0,-8
+0x0000000080000004 in starttext () at src/boot.S:5
+5	    la sp, stack_top        # 设置栈指针
+STEP_PC=0x80000004
+Breakpoint 1 at 0x800010f0: file src/main.c, line 26.
+
+Breakpoint 1, main () at src/main.c:26
+26	int main() {
+AT_MAIN=1
+pc             0x800010f0	0x800010f0 <main>
+sp             0x8001a000	0x8001a000
+=> 0x800010f0 <main>:	addi	sp,sp,-16
+   0x800010f4 <main+4>:	sd	ra,8(sp)
+   0x800010f8 <main+8>:	sd	s0,0(sp)
+   0x800010fc <main+12>:	addi	s0,sp,16
+[Inferior 1 (process 1) detached]
+
+EXIT_CODE=0

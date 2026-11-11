@@ -1,0 +1,7 @@
+/include/ "linux-lab.dts"
+
+&{/chosen} {
+    /* Existing firmware lacks /root for prepare_namespace(). Use an early PID1
+     * shell to perform the standard initramfs -> Ext4 switch_root instead. */
+    bootargs = "console=ttyS0 earlycon=sbi root=/dev/vda rw rootwait rdinit=/bin/sh";
+};

@@ -1,0 +1,83 @@
+COMMAND: ['target/release/here', 'test_resources/bin/lab_calculator.elf', '--max-cycles', '1000000000']
+
+              _                                ____  ___ ____   ____        __     __
+__      _____| | ___ ___  _ __ ___   ___      |  _ \|_ _/ ___| / ___|       \ \   / /
+\ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \     | |_) || |\___ \| |      ____  \ \ / /
+ \ V  V /  __/ | (_| (_) | | | | | |  __/     |  _ < | | ___) | |___  |_____| \ V /
+  \_/\_/ \___|_|\___\___/|_| |_| |_|\___|     |_| \_\___|____/ \____|          \_/
+
+here 0.2.0-beta.1 WIP (02d8f9cd)
+CALCULATOR READY
+
+help
+
+COMMANDS: add sub mul div; help; quit
+
+add 2 3
+
+RESULT 5
+
+mul -7 6
+
+RESULT -42
+
+div -7 3
+
+RESULT -2
+
+sub -2147483648 0
+
+RESULT -2147483648
+
+add 2147483647 1
+
+ERROR overflow
+
+sub -2147483648 1
+
+ERROR overflow
+
+mul 2147483647 2147483647
+
+ERROR overflow
+
+div -2147483648 -1
+
+ERROR overflow
+
+div 1 0
+
+ERROR division by zero
+
+add 2147483648 0
+
+ERROR syntax
+
+add 1
+
+ERROR syntax
+
+add 1 2 trailing
+
+ERROR syntax
+
+unknown 1 2
+
+ERROR syntax
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+ERROR input too long
+
+add 40 2
+
+RESULT 42
+
+quit
+
+CALCULATOR BYE
+
+
+Used time: 0.003596s
+
+EXIT_CODE=0

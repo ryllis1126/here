@@ -322,22 +322,28 @@ impl VirtIOBlockAsyncWorker {
         let mut total_transferred = 0;
         let mut status = VirtIOBlkReqStatus::Ok;
 
-        for buffer in &task.buffers {
+        'segments: for buffer in &task.buffers {
             let data = unsafe { slice::from_raw_parts_mut(buffer.addr as *mut u8, buffer.len) };
             if self.file.seek(SeekFrom::Start(offset)).await.is_err() {
                 status = VirtIOBlkReqStatus::IoErr;
                 break;
             }
-            let Ok(len) = self.file.read(data).await else {
-                status = VirtIOBlkReqStatus::IoErr;
-                break;
-            };
-
-            total_transferred += len as u32;
-            offset += len as u64;
-            if len != data.len() {
-                status = VirtIOBlkReqStatus::IoErr;
-                break;
+            // AsyncRead may return a successful short read (Tokio File caps
+            // each host I/O buffer). Continue until this guest segment is full;
+            // only EOF or a real host error should become a VirtIO I/O error.
+            let mut filled = 0;
+            while filled < data.len() {
+                match self.file.read(&mut data[filled..]).await {
+                    Ok(0) | Err(_) => {
+                        status = VirtIOBlkReqStatus::IoErr;
+                        break 'segments;
+                    }
+                    Ok(len) => {
+                        filled += len;
+                        total_transferred += len as u32;
+                        offset += len as u64;
+                    }
+                }
             }
         }
 

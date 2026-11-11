@@ -1,0 +1,17 @@
+   Compiling here v0.2.0-beta.1 (/home/kazemiyuuka/projects/riscv/here)
+warning: the feature `unsafe_cell_access` has been stable since 1.100.0-nightly and no longer requires an attribute to enable
+ --> src/lib.rs:9:12
+  |
+9 | #![feature(unsafe_cell_access)]
+  |            ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(stable_features)]` on by default
+
+warning: `here` (lib) generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.90s
+     Running tests/virtio_block_io.rs (target/debug/build/here/fc722dbe4dc63843/out/virtio_block_io-fc722dbe4dc63843)
+
+running 1 test
+test block_read_fills_a_segment_larger_than_the_host_io_buffer ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s

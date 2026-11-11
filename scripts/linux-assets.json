@@ -1,0 +1,116 @@
+[
+  {
+    "role": "alpine",
+    "path": ".cache/images/alpine-minirootfs-3.24.4-riscv64.tar.gz",
+    "sha256": "010683db6c73b3ad1c334fc8f93f64ae748ef67ae6d69e964929aeaf8517bff3",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/releases/riscv64/alpine-minirootfs-3.24.4-riscv64.tar.gz"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/tools/apk-tools-static-3.0.9-r0.apk",
+    "sha256": "0a1a0682375f66a83b7b903f6e4638ccfe312547d50d336b5f2be9fc391281be",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/apk-tools-static-3.0.9-r0.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/binutils-2.45.1-r1.apk",
+    "sha256": "bbfe6325fcf280467f09940530b2cfc1ca35563da313be073e02a42c95be2207",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/binutils-2.45.1-r1.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/gcc-15.2.0-r5.apk",
+    "sha256": "af7a7d1dd19fe4745c3dc0ed1ab83624d80db9e558502476cee385fff7eee2fa",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/gcc-15.2.0-r5.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/gmp-6.3.0-r4.apk",
+    "sha256": "3332cf4c4fdfe29eb1f88a7db3f187a503ab126af875d310f989c0a5eb77d62f",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/gmp-6.3.0-r4.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/isl26-0.26-r2.apk",
+    "sha256": "e5f19319d35e2c1e7b30df2359fe9f128c350d0a222a84f24c0c226734838bd2",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/isl26-0.26-r2.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/jansson-2.15.0-r0.apk",
+    "sha256": "835e58892c8e6edf0d3c2a45412be8937aa83b7670db106172de781f2686b95c",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/jansson-2.15.0-r0.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/libatomic-15.2.0-r5.apk",
+    "sha256": "ec66df8426fc430c46d7d9e82753510b5f7722343dc229333653b26e0e8d237c",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/libatomic-15.2.0-r5.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/libgcc-15.2.0-r5.apk",
+    "sha256": "cff2a42ccdec635c115ccafb5efabf2b7c836df6a8eff133b63b98cd7c295cfa",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/libgcc-15.2.0-r5.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/libgcc-static-15.2.0-r5.apk",
+    "sha256": "051a2cc45d5bfd218f9f492e3b85e121dcf8060298f7c82cfbf8d2de1b255049",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/libgcc-static-15.2.0-r5.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/libgomp-15.2.0-r5.apk",
+    "sha256": "a4a4986302965503214983acdde2f1d304c7a1268ec86972dd9efb246b1d3561",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/libgomp-15.2.0-r5.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/libstdc++-15.2.0-r5.apk",
+    "sha256": "dd2fe67cc1a9dd0e69bc1b6f7e51f699419c1073f105f740fa71f3ee502c2daf",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/libstdc++-15.2.0-r5.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/make-4.4.1-r4.apk",
+    "sha256": "f3e901e5575d77ebe01ebc864dc022d670106ceddda71311cca730ac0079a1c2",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/make-4.4.1-r4.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/mpc1-1.3.1-r1.apk",
+    "sha256": "c2add16a035787b10d23e88b53c7f3c14a39498f8594b714c861af0665ab08ce",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/mpc1-1.3.1-r1.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/mpfr4-4.2.2-r0.apk",
+    "sha256": "453f0bf5b678e69471077b6f4259389be40a0be030593d43fe9721f41ea8f1e5",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/mpfr4-4.2.2-r0.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/musl-1.2.6-r3.apk",
+    "sha256": "f21b18f22a511de1e57f70112f761d0daad0c7d74e0734a82fcd5e037387dbb4",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/musl-1.2.6-r3.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/musl-dev-1.2.6-r3.apk",
+    "sha256": "f47066d861413b3d76fe200240ea2919cdf807f82770d574a16d10dbd6b56ad7",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/musl-dev-1.2.6-r3.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/zlib-1.4-r0.apk",
+    "sha256": "066be0a62cb512c3bebbe87165d93e909e1237efb7ceb4424ac30e28b032a6dc",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/zlib-1.4-r0.apk"
+  },
+  {
+    "role": "alpine",
+    "path": ".cache/linux/apks/zstd-libs-1.5.7-r2.apk",
+    "sha256": "6d1b83640dae191c1efb34cbef49fafe6eda507c49232efa4948c8dfad4eab87",
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/riscv64/zstd-libs-1.5.7-r2.apk"
+  }
+]

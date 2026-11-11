@@ -1,0 +1,11 @@
+/include/ "virt.dts"
+
+/* Device order: --device virtio-block:IMAGE --device virtio-rng:/dev/urandom. */
+&{/soc} {
+    virtio_mmio@10002000 {
+        interrupts = <0x02>;
+        interrupt-parent = <0x11>;
+        reg = <0x00 0x10002000 0x00 0x1000>;
+        compatible = "virtio,mmio";
+    };
+};
