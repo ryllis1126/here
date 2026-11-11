@@ -15,4 +15,4 @@
 
 最终默认套件 347 项和自定义指令套件 352 项均通过，含覆盖 238 个 ELF 的 8 组 ISA 测试。模拟器串口和调试器会话、块镜像与 Alpine 原生编译的运行记录分开保存。[默认套件](evidence/ch7-default-tests.txt) · [自定义指令套件](evidence/ch7-custom-tests.txt) · [RVV](evidence/ch7-rvv-final.txt) · [BusyBox](evidence/ch7-linux-disk.txt) · [Alpine](evidence/ch7-alpine.txt)
 
-master 的推送目标为个人 origin。2026-11-11 的远端只读检查确认 origin/master 仍指向 7cd34e277692c5fe6c5a9959b3206e0cff0808ff，尚无章节标签。WSL 的 gh auth status 显示未登录。完成 WSL GitHub HTTPS 认证后，向个人 origin 推送 master、ch0 至 ch7 以及 ch3-fix1，并核对远端附注标签对象和 peeled commit。
+2026-11-11，个人 origin 的 master 和 9 个附注标签已通过一次原子推送发布。发布时 master 指向验收提交 `26a13c72365eca7490936dcd904af22da1683bff`。用 `git ls-remote origin refs/heads/master 'refs/tags/ch*'` 核验了分支、标签对象和标签所指提交，均与本地一致。[个人 origin](https://github.com/ryllis1126/here)
